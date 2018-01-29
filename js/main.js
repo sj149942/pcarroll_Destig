@@ -19,6 +19,8 @@ var ageVerify = function () {
             document.getElementById("submitSurvey").style.display = "initial";
         }
     }
+
+    console.log("hi")
 };
 
 function saveLocation($location) {
