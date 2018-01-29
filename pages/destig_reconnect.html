@@ -1,0 +1,1340 @@
+<html >
+<link rel="stylesheet" type="text/css" href="../styles/style.css">
+<script type="text/javascript" src="../js/main.js"></script>
+
+<div class="page-wrapper">
+    <p id="User_ID" style="display: none" hidden>ID: <output id="idOutput"></output></p>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <section class="warning"></section>
+
+    <form action="../php/hope.php" method = "post">
+
+        <!-- old method of assigning ids (obsolete) -->
+        <div id = "ID" class="ID" hidden >
+            <img src="../images/ExpAppliedEcon.png">
+            <p>Participant ID:</p>
+            <input type="text" name="ID_num" id="ID_num" value='' placeholder="My ID" oninput="checkID()">
+            <input type="text" name="treatment" id="treatment" value='' placeholder="My ID" hidden>
+
+            <div class="warning"></div>
+
+            <div class="button">
+                <button type="button" onclick="continue_buttons(2);" id="submitID"
+                        style = "display: none">Continue</button>
+            </div>
+        </div>
+
+        <!-- Show the instructions for the experiment -->
+        <div id="instructions" class = "instructions" >
+            <h3>Instructions:</h3>
+
+            <p><em style="font-size:20px;">Please read these instructions carefully and do not communicate with anyone
+                while you are making your decisions.</em></p>
+
+            <ul>
+                <li><strong>You will earn $10 by participating in this experiment that you may keep and/or use to
+                    purchase produce. You may think of this money as a bank account from which you can withdraw money.
+                </strong></li>
+
+                <li>Depending on the decisions you make, you may receive a combination of cash and/or produce.
+                    Your decisions are just like the ones you make in a store: you either buy the produce at the listed
+                    price or you do not. Please remember that all decisions are real purchasing decisions.</li>
+            </ul>
+
+            <br>
+
+            <h3>Steps:</h3>
+
+            <ol>
+                <li>You will face a series of “options” where you have the opportunity to buy produce.
+                    For each option, decide if you want to buy the produce at the listed price by selecting 'Yes' or
+                    'No'.</li>
+
+                <li>Complete a short survey.</li>
+
+                <li>Roll a digital dice to determine which option will be selected.  Only one option will be selected.
+                    This means that each decision you make is equally likely to be your final decision.</li>
+
+                <li>Receive cash and/or produce.</li>
+            </ol>
+
+            <br>
+
+
+            <h3>Consider the following examples:</h3>
+            <ul>
+                <li><strong>Example 1:</strong> If your decision is 'Yes' for an option that costs $3, and this option
+                    is randomly selected by the digital dice, you will receive the produce and $7 cash ($10 - $3 = $7).
+                </li>
+
+                <li><strong>Example 2:</strong> If your decision is 'No' for an option, and this option is randomly
+                    selected by the digital dice, you will receive $10 and will not receive any produce.</li>
+            </ul>
+            <br><br>
+            <button type="button" id="continueA" onclick="continue_buttons(3);">Continue</button>
+        </div>
+
+        <!-- Show Definitions -->
+        <div id="definition" class = "definition" hidden>
+            <p style="font-size:25px;"><em>Consider the following definitions from the EPA: </em></p>
+            <div class="water-list">
+                <p id="waterDef-0"></p>
+                <br>
+                <p id="waterDef-1"></p>
+                <br>
+                <p id="waterDef-2"></p>
+                <br>
+                <p id="waterDef-3"></p>
+            </div>
+            <br><br>
+            <button type="button" id="continue_to_whatever" onclick="continue_buttons(4);">Continue</button>
+        </div>
+
+        <!--Show info -->
+        <div id="information" class = "information" hidden>
+
+            <p><em>Consider the following piece of information:</em></p>
+            <br>
+            <p id="info"></p>
+
+            <br><br>
+            <button type="button" id="continue_to_experiment" onclick="continue_buttons(5);">Continue</button>
+        </div>
+
+        <!-- Experiment Page. -->
+        <div class="experiment" id="experiment" hidden>
+            <hr>
+            <br />
+            <p style="font-size:25px;"><em>Consider the following definitions from the EPA: </em></p>
+            <div class="water-list">
+                <p id="waterDef-0-repeat"></p>
+                <br>
+                <p id="waterDef-1-repeat"></p>
+                <br>
+                <p id="waterDef-2-repeat"></p>
+                <br>
+                <p id="waterDef-3-repeat"></p>
+            </div>
+            <br><br>
+            <h3 style = "text-align: center"><u><strong>Please make your decisions below</strong></u></h3>
+            <br>
+            <hr>
+            <br>
+
+            <div class="veggie-list">
+                <div id="experiment-question-1">
+                    <img id="treatment-0">
+                    <p id="treatment-0-question"></p>
+                    <br>
+                    <input title="treatment" type="radio" style="display: inline-block;" name="treatment-0-choice"
+                           id="treatment-0-choice-yes" value="Yes" onclick="treatment_0_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="treat0" type="radio" style="display: inline-block;" name="treatment-0-choice"
+                           id="treatment-0-choice-no" value="No" onclick="treatment_0_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_0_decision" id="treatment_0_decision" value=''>
+                    <input title="" type="text" hidden name="price-0" id="price-0" value=''>
+                    <input title="" type="text" hidden name="item-0" id="item-0" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-2">
+                    <img id="treatment-1">
+                    <p id="treatment-1-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-1-choice"
+                           id="treatment-1-choice-yes" value="Yes" onclick="treatment_1_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-1-choice"
+                           id="treatment-1-choice-no" value="No" onclick="treatment_1_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_1_decision" id="treatment_1_decision" value=''>
+                    <input title="" type="text" hidden name="price-1" id="price-1" value=''>
+                    <input title="" type="text" hidden name="item-1" id="item-1" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-3">
+                    <img id="treatment-2">
+                    <p id="treatment-2-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-2-choice"
+                           id="treatment-2-choice-yes" value="Yes" onclick="treatment_2_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-2-choice"
+                           id="treatment-2-choice-no" value="No" onclick="treatment_2_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_2_decision" id="treatment_2_decision" value=''>
+                    <input title="" type="text" hidden name="price-2" id="price-2" value=''>
+                    <input title="" type="text" hidden name="item-2" id="item-2" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-4">
+                    <img id="treatment-3">
+                    <p id="treatment-3-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-3-choice"
+                           id="treatment-3-choice-yes" value="Yes" onclick="treatment_3_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-3-choice"
+                           id="treatment-3-choice-no" value="No" onclick="treatment_3_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_3_decision" id="treatment_3_decision" value=''>
+                    <input title="" type="text" hidden name="price-3" id="price-3" value=''>
+                    <input title="" type="text" hidden name="item-3" id="item-3" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-5">
+                    <img id="treatment-4">
+                    <p id="treatment-4-question"></p>
+                    <br>
+                    <input title=""  type="radio" style="display: inline-block;" name="treatment-4-choice"
+                           id="treatment-4-choice-yes" value="Yes" onclick="treatment_4_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-4-choice"
+                           id="treatment-4-choice-no" value="No" onclick="treatment_4_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_4_decision" id="treatment_4_decision" value=''>
+                    <input title="" type="text" hidden name="price-4" id="price-4" value=''>
+                    <input title="" type="text" hidden name="item-4" id="item-4" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-6">
+                    <img id="treatment-5">
+                    <p id="treatment-5-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-5-choice"
+                           id="treatment-5-choice-yes" value="Yes" onclick="treatment_5_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-5-choice"
+                           id="treatment-5-choice-no" value="No" onclick="treatment_5_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_5_decision" id="treatment_5_decision" value=''>
+                    <input title="" type="text" hidden name="price-5" id="price-5" value=''>
+                    <input title="" type="text" hidden name="item-5" id="item-5" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-7">
+                    <img id="treatment-6">
+                    <p id="treatment-6-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-6-choice"
+                           id="treatment-6-choice-yes" value="Yes" onclick="treatment_6_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-6-choice"
+                           id="treatment-6-choice-no" value="No" onclick="treatment_6_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_6_decision" id="treatment_6_decision" value=''>
+                    <input title="" type="text" hidden name="price-6" id="price-6" value=''>
+                    <input title="" type="text" hidden name="item-6" id="item-6" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-8">
+                    <img id="treatment-7">
+                    <p id="treatment-7-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-7-choice"
+                           id="treatment-7-choice-yes" value="Yes" onclick="treatment_7_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-7-choice"
+                           id="treatment-7-choice-no" value="No" onclick="treatment_7_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_7_decision" id="treatment_7_decision" value=''>
+                    <input title="" type="text" hidden name="price-7" id="price-7" value=''>
+                    <input title="" type="text" hidden name="item-7" id="item-7" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-9">
+                    <img id="treatment-8">
+                    <p id="treatment-8-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-8-choice"
+                           id="treatment-8-choice-yes" value="Yes" onclick="treatment_8_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-8-choice"
+                           id="treatment-8-choice-no" value="No" onclick="treatment_8_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_8_decision" id="treatment_8_decision" value=''>
+                    <input title="" type="text" hidden name="price-8" id="price-8" value=''>
+                    <input title="" type="text" hidden name="item-8" id="item-8" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-10">
+                    <img id="treatment-9">
+                    <p id="treatment-9-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-9-choice"
+                           id="treatment-9-choice-yes" value="Yes" onclick="treatment_9_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-9-choice"
+                           id="treatment-9-choice-no" value="No" onclick="treatment_9_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_9_decision" id="treatment_9_decision" value=''>
+                    <input title="" type="text" hidden name="price-9" id="price-9" value=''>
+                    <input title="" type="text" hidden name="item-9" id="item-9" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-11">
+                    <img id="treatment-10">
+                    <p id="treatment-10-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-10-choice"
+                           id="treatment-10-choice-yes" value="Yes" onclick="treatment_10_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-10-choice"
+                           id="treatment-10-choice-no" value="No" onclick="treatment_10_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_10_decision" id="treatment_10_decision" value=''>
+                    <input title="" type="text" hidden name="price-10" id="price-10" value=''>
+                    <input title="" type="text" hidden name="item-10" id="item-10" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-12">
+                    <img id="treatment-11">
+                    <p id="treatment-11-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-11-choice"
+                           id="treatment-11-choice-yes" value="Yes" onclick="treatment_11_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-11-choice"
+                           id="treatment-11-choice-no" value="No" onclick="treatment_11_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_11_decision" id="treatment_11_decision" value=''>
+                    <input title="" type="text" hidden name="price-11" id="price-11" value=''>
+                    <input title="" type="text" hidden name="item-11" id="item-11" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-13">
+                    <img id="treatment-12">
+                    <p id="treatment-12-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-12-choice"
+                           id="treatment-12-choice-yes" value="Yes" onclick="treatment_12_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-12-choice"
+                           id="treatment-12-choice-no" value="No" onclick="treatment_12_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_12_decision" id="treatment_12_decision" value=''>
+                    <input title="" type="text" hidden name="price-12" id="price-12" value=''>
+                    <input title="" type="text" hidden name="item-12" id="item-12" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-14">
+                    <img id="treatment-13">
+                    <p id="treatment-13-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-13-choice"
+                           id="treatment-13-choice-yes" value="Yes" onclick="treatment_13_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-13-choice"
+                           id="treatment-13-choice-no" value="No" onclick="treatment_13_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="" type="text" hidden name="treatment_13_decision" id="treatment_13_decision" value=''>
+                    <input title="" type="text" hidden name="price-13" id="price-13" value=''>
+                    <input title="" type="text" hidden name="item-13" id="item-13" value=''>
+                </div>
+                <br><hr><br>
+                <div id="experiment-question-15">
+                    <img id="treatment-14">
+                    <p id="treatment-14-question"></p>
+                    <br>
+                    <input title="" type="radio" style="display: inline-block;" name="treatment-14-choice"
+                           id="treatment-14-choice-yes" value="Yes" onclick="treatment_14_decision.value=this.value;
+                       submitExperiment();">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input title="choice-14" type="radio" style="display: inline-block;" name="treatment-14-choice"
+                           id="treatment-14-choice-no" value="No" onclick="treatment_14_decision.value=this.value;
+                       submitExperiment();">
+                    <br>
+                    <p >Yes</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p>No</p>
+                    <br>
+                    <input title="decision-14" type="text" hidden name="treatment_14_decision" id="treatment_14_decision" value=''>
+                    <input title="price-14" type="text" hidden name="price-14" id="price-14" value=''>
+                    <input title="item-14" type="text" hidden name="item-14" id="item-14" value=''>
+                </div>
+                <br><hr><br>
+            </div>
+            <div class="warning"></div>
+
+            <div class="button">
+                <button type="button" id="continueExp" onclick="continue_buttons(6)"
+                        style="display: none;">Continue</button>
+            </div>
+            <br />
+        </div>
+
+        <!---------- Survey  questions ------------>
+        <div id="survey" class="survey" hidden>
+            <form action="survey.php" method="post">
+                <ol>
+                    <li>What is your age?
+                        <br><br>
+                        <input title="other" type="number" name="age" value="0" id="age" min="18" onkeyup="ageVerify()"
+                               onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127">
+                        <br><br>
+                    </li>
+                    <li>What is your Gender?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="gender" value="male">Male
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="gender" value="female"> Female
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="gender" value="other"> Other
+                        </div>
+                    </li>
+
+                    <li>Do you live in the U.S.?
+                        <div>
+                            <div class="radio-item">
+                                <input title="radio" type="radio" name="live" value="yes">Yes
+                            </div>
+                            <div class="radio-item">
+                                <input title="radio" type="radio" name="live" value="no">No
+                            </div>
+                        </div>
+                        <br>
+                    </li>
+                    <li>What is your ZIP code?
+                        <br><br>
+                        <input title="other" type="number" name="zip" id="zip" min="10000" max="99999"
+                               onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                        <br><br>
+                    </li>
+
+                    <li>What is your profession?
+
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="profession" value="Government">
+                            <label>Government</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="profession" value="Education">
+                            <label>Education</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="profession" value="Business">
+                            <label>Business</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="profession" value="Agriculture">
+                            <label>Agriculture</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="profession" value="Student">
+                            <label>Student</label>
+                        </div>
+                        <input title="radio" name="profession" type="radio">
+                        <label>Other (please specify)</label>
+                        <div class="radio-item">
+                            <input title="other" type="text" id="otherProfession"
+                                   onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 &&
+                       event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
+                                   onfocus="document.getElementById('other').checked = true;" value="">
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>Are you:
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="political" value="liberal"
+                                   onclick="political_.value=this.value">
+                            <label>Politically liberal</label>
+                            <br>
+                            <input title="radio" type="radio" name="political" value="moderate"
+                                   onclick="political_.value=this.value">
+                            <label>Politically moderate</label>
+                            <br>
+                            <input title="radio" type="radio" name="political" value="conservative"
+                                   onclick="political_.value=this.value">
+                            <label>Politically conservative</label>
+                            <br>
+                            <input title="radio" name="political" type="radio">
+                            <label>Other (please specify)</label>
+                            <br>
+                            <input title="other" type="text"
+                                   onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
+                                   oninput="political_.value=this.value"
+                                   onfocus="document.getElementById('other').checked = true;" value="">
+                            <input hidden title="other" type="text" name="political_" value="">
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>How would you identify your ethnicity?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="Non-Hispanic White"
+                                   onclick="ethnicity.value=this.value">
+                            <label>Non-Hispanic White</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="Hispanic or Latino"
+                                   onclick="ethnicity.value=this.value">
+                            <label>Hispanic or Latino</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="Middle Eastern or Arab"
+                                   onclick="ethnicity.value=this.value">
+                            <label>Middle Eastern or Arab</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="Black" onclick="ethnicity.value=this.value">
+                            <label>Black</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="East Asian"
+                                   onclick="ethnicity.value=this.value">
+                            <label>East Asian</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="South Asian"
+                                   onclick="ethnicity.value=this.value">
+                            <label>South Asian</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="Pacific Islander"
+                                   onclick="ethnicity.value=this.value">
+                            <label>Pacific Islander</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="race" value="Native American"
+                                   onclick="ethnicity.value=this.value">
+                            <label>Native American</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="other" type="radio" name="race">
+                            <label>Other (please specify)</label>
+                            <br>
+                            <input title="other" type="text" name="race"
+                                   onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
+                                   oninput="ethnicity.value=this.value"
+                                   onfocus="document.getElementById('other').checked = true;" value="">
+                        </div>
+                        <input hidden title="other" type="text" name="ethnicity" value="">
+                        <br>
+                    </li>
+
+                    <li>Which category best describes your <u>household</u> income (before taxes) in 2015?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="Less than $10000">
+                            <label>Less than $10,000</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$10000-$14999">
+                            <label>$10,000-$14,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$15000-$24999">
+                            <label>$15,000-$24,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$25000-$34999">
+                            <label>$25,000-$34,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$35000-$49999">
+                            <label>$35,000-$49,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$50000-$74999">
+                            <label>$50,000-$74,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$75000-$99999">
+                            <label>$75,000-$99,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$100000-$149999">
+                            <label>$100,000-$149,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$150000-$199999">
+                            <label>$150,000-$199,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$200000-$249999">
+                            <label>$200,000-$249,999</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="income" value="$250000 and above">
+                            <label>$250,000 and above</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>What is the highest level of education that you have completed?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="education" value="Some high school">
+                            <label>Some high school</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="education" value="High school graduate">
+                            <label>High school graduate</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="education" value="Some college">
+                            <label>Some college</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="education" value="Associate degree">
+                            <label>Associate degree</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="education" value="Bachelor's degree">
+                            <label>Bachelor's degree</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="education" value="Graduate degree/Professional">
+                            <label>Graduate degree/Professional</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>How often do you consume the following produce:
+                        <br/><br>
+                        <h4>Grapes:</h4>
+                        <br>
+                        <input title="slider" type="number" name="GrapeConsume" value="0" id="GrapeConsume" min="0" max="7"
+                               style="width:80px;height:40px;"
+                               onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127 '>
+                        <label> times per month</label>
+
+                        <br/><br>
+                        <h4>Almonds:</h4>
+                        <br>
+                        <input title="slider" type="number" name="AlmondsConsume" value="0" id="AlmondsConsume" min="0" max="7"
+                               style="width:80px;height:40px;"
+                               onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                        <label> times per month</label>
+
+                        <br/><br>
+                        <h4>Baby carrots:</h4>
+                        <br>
+                        <input title="slider" type="number" name="CarrotConsume" value="0" id="CarrotConsume" min="0" max="7"
+                               style="width:80px;height:40px;"
+                               onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                        <label> times per month</label>
+                        <br>
+                    </li>
+
+                    <li>Are you the primary shopper in your household?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="primShop" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="primShop" value="no">
+                            <label>No</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>What is the percentage of fresh foods compared to canned or frozen foods in your overall
+                        <strong>fruit</strong> consumption?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="freshCons" value="Less than 20% fresh">
+                            <label>Less than 20% fresh</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="freshCons" value="20-50% fresh">
+                            <label>20-50% fresh</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="freshCons" value="50-80% fresh">
+                            <label>50-80% fresh</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="freshCons" value="More than 80% fresh">
+                            <label>More than 80% fresh</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>What is the percentage of fresh foods compared to canned or frozen foods in your overall
+                        <strong>vegetable</strong> consumption?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="freshACons" value="Less than 20% fresh">
+                            <label>Less than 20% fresh</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="freshACons" value="20-50% fresh">
+                            <label>20-50% fresh</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="freshACons" value="50-80% fresh">
+                            <label>50-80% fresh</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="other" type="radio" name="freshACons" value="More than 80% fresh">
+                            <label>More than 80% fresh</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>Do you grow your own food?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="HomeGrown" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="HomeGrown" value="no">
+                            <label>No</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>How important are the following food attributes to you?
+                        <div class="slider">
+                            <p>Price: <strong>
+                                <output for="foodPrice" id="foodPriceValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not Important (1)</strong></span>
+                            <input title="other" name="foodPrice" id="foodPrice" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 1)">
+                            <span><strong>Very Important (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>I want the time it takes me to prepare my food to be as minimal as possible: <strong>
+                                <output for="foodTime" id="foodTimeValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not Important (1)</strong></span>
+                            <input title="other" id="foodTime" name="foodTime" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 2)">
+                            <span><strong>Very Important (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Organic: <strong>
+                                <output for="foodOrganic" id="foodOrganicValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not Important (1)</strong></span>
+                            <input title="other" name="foodOrganic" id="foodOrganic" type="range" value="3" min="1" max="5"
+                                   step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 3)">
+                            <span><strong>Very Important (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>I prefer to purchase foods that are GMO (Genetically Modified Organisms) free: <strong>
+                                <output for="foodNonGMO" id="foodNonGMOValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not Important (1)</strong></span>
+                            <input title="other" id="foodNonGMO" name="foodNonGMO" type="range" value="3" min="1" max="5"
+                                   step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 4)">
+                            <span><strong>Very Important (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>The type of water my produce is irrigated with: <strong>
+                                <output for="foodWater" id="foodWaterValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not Important (1)</strong></span>
+                            <input title="other" id="foodWater" name="foodWater" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 5)">
+                            <span><strong>Very Important (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Locally grown/produced: <strong>
+                                <output for="foodLocal" id="foodLocalValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not Important (1)</strong></span>
+                            <input title="other" id="foodLocal" name="foodLocal" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 6)">
+                            <span><strong>Very Important (5)</strong></span>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>What type of water do you typically drink?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="WaterPref" value="Bottled"
+                                   onclick="waterPref_.value=this.value">
+                            <label>Bottled Water</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="WaterPref" value="Filtered Tap"
+                                   onclick="waterPref_.value=this.value">
+                            <label>Filtered Tap Water</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="WaterPref" value="Tap"
+                                   onclick="waterPref_.value=this.value">
+                            <label>Tap Water</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="WaterPref" id="other">
+                            <label>Other (please specify)</label>
+                            <input title="other" type="text" id="otherWaterPref"
+                                   onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
+                                   oninput="waterPref_.value=this.value"
+                                   value=""
+                            >
+                        </div>
+                        <input hidden title="other" type="text" name="waterPref_" value="">
+                        <br>
+                    </li>
+
+                    <li>Do you know where the water in your home comes from (private well, public well, municipal water supply)?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="waterSource" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="waterSource" value="no">
+                            <label>No</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>How concerned are you about water availability in the future in these areas?
+                        <div class="slider">
+                            <p>Your Community: <strong>
+                                <output for="waterCommunity" id="waterCommunityValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="waterCommunity" name="waterCommunity" type="range" value="3" min="1"
+                                   max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 7)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Your State: <strong>
+                                <output for="waterState" id="waterStateValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="waterState" name="waterState" type="range" value="3" min="1" max="5"
+                                   step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 8)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>United States: <strong>
+                                <output for="waterUS" id="waterUSValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="waterUS" name="waterUS" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 9)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Globally: <strong>
+                                <output for="waterWorld" id="waterWorldValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="waterWorld" name="waterWorld" type="range" value="3" min="1" max="5"
+                                   step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 10)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>How concerned are you about water availability <strong>in your community</strong> over these following
+                        time
+                        periods?
+                        <div class="slider">
+                            <p>Present: <strong>
+                                <output for="Present" id="PresentValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="present" name="present" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 11)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Next 10 years: <strong>
+                                <output for="tenYears" id="tenYearsValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="tenYears" name="tenYears" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 12)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Next 50 years: <strong>
+                                <output for="thirtyYears" id="thirtyYearsValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="thirtyYears" name="thirtyYears" type="range" value="3" min="1" max="5"
+                                   step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 13)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Beyond the next 50 years: <strong>
+                                <output for="fiftyYears" id="fiftyYearsValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" id="fiftyYears" name="fiftyYears" type="range" value="3" min="1" max="5"
+                                   step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 14)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>How concerned are you about climate change in these areas?
+                        <div class="slider">
+                            <p>Your Community: <strong>
+                                <output for="climateCommunity" id="climateCommunityValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" name="climateCommunityValue" id="climateCommunity" type="range" value="3"
+                                   min="1" max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 15)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Your State: <strong>
+                                <output for="climateState" id="climateStateValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" name="climateStateValue" id="climateState" type="range" value="3" min="1"
+                                   max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 16)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>United States: <strong>
+                                <output for="climateUS" id="climateUSValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" name="climateUSValue" id="climateUS" type="range" value="3" min="1" max="5"
+                                   step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 17)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Globally: <strong>
+                                <output for="climateWorld" id="climateWorldValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" name="climateWorldValue" id="climateWorld" type="range" value="3" min="1"
+                                   max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 18)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>How concerned are you about climate change <strong>in your community</strong> over these following time
+                        periods?
+                        <div class="slider">
+                            <p>Present: <strong>
+                                <output for="climatePresent" id="climatePresentValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" name="climatePresentValue" id="climatePresent" type="range" value="3" min="1"
+                                   max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 19)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Next 10 years: <strong>
+                                <output for="climateTenYears" id="climateTenYearsValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" name="climateTenYearsValue" id="climateTenYears" type="range" value="3" min="1"
+                                   max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 20)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Next 50 years: <strong>
+                                <output for="climateThirtyYears_" id="climateThirtyYearsValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="other" name="climateThirtyYearsValue" id="climateThirtyYears" type="range" value="3"
+                                   min="1" max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 21)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Beyond the next 50 years: <strong>
+                                <output for="climateFiftyYears" id="climateFiftyYearsValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Not At All (1)</strong></span>
+                            <input title="radio" name="climateFiftyYearsValue" id="climateFiftyYears" type="range" value="3"
+                                   min="1" max="5" step="1" data-show-value="true"
+                                   oninput="outputUpdate(value, 22)">
+                            <span><strong>Very Concerned (5)</strong></span>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>Before this experiment had you ever heard of:
+                        <h4>Recycled produced water</h4>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="heardPro" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="heardPro" value="no">
+                            <label>No</label>
+                        </div>
+
+                        <h4>Recycled black water</h4>
+                        <div class="radio-item">
+                            <input type="radio" title="radio" name="heardB" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="heardB" value="no">
+                            <label>No</label>
+                        </div>
+
+                        <h4>Recycled gray water</h4>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="heardG" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="heardG" value="no">
+                            <label>No</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>Do you reuse or recycle water at home?
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="reuseWater" value="yes">
+                            <label>Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="reuseWater" value="no">
+                            <label>No</label>
+                        </div>
+                        <div class="radio-item">
+                            <input title="radio" type="radio" name="reuseWater" value="IDK">
+                            <label>Don't Know</label>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li> Compared to conventional water, the standards for these types of water should be (where
+                        <strong>3</strong>
+                        means the same standards as conventional water):
+
+                        <div class="slider">
+                            <p>Recycled produced water: <strong>
+                                <output for="YNDiff" id="YNDiffValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Greatly lower(1)</strong></span>
+                            <input title="slider" name="YNDiffValue" id="YNDiff" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 23)">
+                            <span><strong>Greatly higher(5)</strong></span>
+                        </div>
+                        <br>
+
+                        <div class="slider">
+                            <p>Recycled black water: <strong>
+                                <output for="YNDiffA" id="YNDiffAValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Greatly lower(1)</strong></span>
+                            <input title="slider" name="YNDiffAValue" id="YNDiffA" type="range" value="3" min="1" max="5"
+                                   step="1"
+                                   data-show-value="true" oninput="outputUpdate(value, 24)">
+                            <span><strong>Greatly higher(5)</strong></span>
+                        </div>
+                        <br>
+
+                        <div class="slider">
+                            <p>Recycled gray water: <strong>
+                                <output for="YNDiffB" id="YNDiffBValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Greatly lower(1)</strong></span>
+                            <input title="slider" name="YNDiffBValue" id="YNDiffB" type="range" value="3" min="1" max="5"
+                                   step="1"
+                                   data-show-value="true" oninput="outputUpdate(value, 25)">
+                            <span><strong>Greatly higher(5)</strong></span>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>I trust these groups to test and monitor recycled irrigation water:
+                        <div class="slider">
+                            <p>The federal government:<strong>
+                                <output for="Fed" id="FedValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Strongly Disagree (1)</strong></span>
+                            <input id="Fed" name="Fed" title="slider" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 26)">
+                            <span><strong>Strongly Agree (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>My state government:<strong>
+                                <output for="StateGov" id="StateGovValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Strongly Disagree (1)</strong></span>
+                            <input id="StateGov" name="StateGov" title="slider" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true" oninput="outputUpdate(value, 27)">
+                            <span><strong>Strongly Agree (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>My local government:<strong>
+                                <output for="LocalGov" id="LocalGovValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Strongly Disagree (1)</strong></span>
+                            <input title="slider" name="LocalGov" id="LocalGov_" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true" oninput="outputUpdate(value, 28)">
+                            <span><strong>Strongly Agree (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Individual farmers:<strong>
+                                <output for="Farm" id="FarmValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Strongly Disagree (1)</strong></span>
+                            <input title="slider" name="Farm" id="Farm" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 29)">
+                            <span><strong>Strongly Agree (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Non-profit environmental groups:<strong>
+                                <output for="Np" id="NpValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Strongly Disagree (1)</strong></span>
+                            <input title="slider" name="Np" id="Np" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 30)">
+                            <span><strong>Strongly Agree (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>Public waste water treatment plants:<strong>
+                                <output for="Plant" id="PlantValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Strongly Disagree (1)</strong></span>
+                            <input id="Plant" name="Plant" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 31)" title="slider">
+                            <span><strong>Strongly Agree (5)</strong></span>
+                        </div>
+
+                        <div class="slider">
+                            <p>For-profit waste water treatment plants:<strong>
+                                <output for="PlantA" id="PlantAValue">3</output>
+                            </strong></p>
+                            <br><br>
+                            <span><strong>Strongly Disagree (1)</strong></span>
+                            <input id="PlantA" name="PlantA" type="range" value="3" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="outputUpdate(value, 32)" title="slider">
+                            <span><strong>Strongly Agree (5)</strong></span>
+                        </div>
+                    </li>
+
+                </ol>
+
+                <div class="warning"></div>
+                <br>
+                <button type="submit" id="submitSurvey" hidden>Continue</button>
+            </form>
+        </div>
+
+        <!-- Dice Roll Screen -->
+        <div id="dice-roll" class="dice-roll" hidden>
+            <p>Please roll the dice to determine which one of your 13 decisions will be selected.</p>
+            <div style="text-align: center;"><p id="dice-number" style="width:200px;"></p></div>
+            <div style="text-align: center;"><p id="final-dice-number" hidden style="width:200px;"></p></div>
+            <br>
+            <button type="button" id="dice_roller" onclick="startTimer();">Roll Dice</button>
+            <br>
+            <div style="text-align: center;"><button type="button" id="dice_stopper"
+                                                     style="display: none;" onclick="stopDice();">Stop Dice</button></div>
+            <div class="button">
+                <button type="button" style="display: none"
+                        onclick="continue_buttons(8);" id="dice-roll-button">Continue</button>
+            </div>
+
+            <input title="optionSelected" type="text" style="display: none;" name="option-selected" id="option-selected" value=''>
+        </div>
+
+
+        <!-- Final screen, shows final results -->
+
+        <div id="results" class="results" hidden>
+            <div style="text-align: center;">
+                <h3><strong><u>Outcome:</u></strong></h3>
+                <p>Option &nbsp;</p><p id="optionNum"></p> was randomly selected, the option information is below:
+                <br>
+                <p id="optionInfo" style="font-weight: bold; display: inline-block;font-size: 20px;"></p>
+                <br>
+                <p>You chose&nbsp;</p><p id="yesno"></p> &nbsp;to&nbsp;purchasing this produce. The agreed price is
+                <p id="final-price" style="display: inline-block;"></p><p>. You will receive </p>
+                <p id="final-selection" style="display: inline-block;"></p><p>&nbsp;and </p>
+                <p id="takeHome" style="display: inline-block;"></p><p>.</p>
+            </div>
+            <br>
+            <input title="finalSelectionData" type="text" hidden name="final-selection-data" id="final-selection-data" value=''>
+            <p hidden id="final-item"></p>
+            <br>
+            <input title="finalItemData" type="text" hidden name="final-item-data" id="final-item-data" value=''>
+
+            <br>
+            <input title="finalPriceData" type="text" hidden name="final-price-data" id="final-price-data" value=''>
+            <br>
+            <input title="yesNo" type="text" hidden name="yesno-data" id="yesno-data" value=''>
+            <div class="button">
+                <button type="button" id="password_button" style="font-size: 1.0vm;"
+                        onclick="checkPassword();">ADMIN</button>
+            </div>
+            <input title="password" type="password" name="password" id="password" value='' onkeydown="passCode();" style="display: none">
+            <div class="button">
+                <button type="button" id="admin" style="font-size: 1.0vm; display: none;"
+                        onclick="continue_buttons(9);">Continue</button>
+            </div>
+            <br />
+        </div>
+
+        <div id="admin_field" class="admin_field" hidden>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+</html>
