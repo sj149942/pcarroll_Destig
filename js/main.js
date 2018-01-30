@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    //newUser();
+    newUser();
 });
 
 var images = [], x = -1;
@@ -220,24 +220,29 @@ var continue_buttons = function (part) {
         document.getElementById("instructions").style.display = "initial";
     }
     else if (part === 3) {
+        $("#instructions").css({"display": "none"});
+        $("#definitions").css({"display": "initial"});
+        saveLocation("definitions");
+    }
+    else if (part === 4) {
         document.getElementById("User_ID").style.display = "initial";
         var $treatment = $("#treatment").val();
 
         switch($treatment){
             case "A":
-                document.getElementById("instructions").style.display = "none";
+                document.getElementById("definitions").style.display = "none";
                 document.getElementById("experiment").style.display = "initial";
                 saveLocation("experiment");
                 experiment();
                 break;
             case "B":
-                document.getElementById("instructions").style.display = "none";
+                document.getElementById("definitions").style.display = "none";
                 document.getElementById("information").style.display = "initial";
                 saveLocation("information");
                 getTreatmentInfo();
                 break;
             case "C":
-                document.getElementById("instructions").style.display = "none";
+                document.getElementById("definitions").style.display = "none";
                 document.getElementById("information").style.display = "initial";
                 saveLocation("information");
                 getTreatmentInfo();
@@ -245,33 +250,22 @@ var continue_buttons = function (part) {
 
         }
     }
-    else if (part === 4) {
+    else if (part === 5) {
+        $("#definitions").css({"display": "none"});
         $("#information").css({"display": "none"});
         $("#experiment").css({"display": "initial"});
+        experiment();
         saveLocation("experiment");
-
-    }
-    else if (part === 5) {
-        if (document.getElementById("treatment").value !== "A") {
-            document.getElementById("information").style.display = "none";
-            experiment();
-        }
-        else {
-            document.getElementById("definition").style.display = "none";
-        }
-        document.getElementById("experiment").style.display = "initial";
-        saveLocation("experiment");
-
     }
     else if (part === 6) {
-        document.getElementById("experiment").style.display = "none";
-        document.getElementById("survey").style.display = "initial";
+        $("#experiment").css({"display": "none"});
+        $("#survey").css({"display": "initial"});
         saveLocation("survey");
-        $('html,body').scrollTop;
+
     }
     else if (part === 7) {
-        document.getElementById("survey").style.display = "none";
-        document.getElementById("dice-roll").style.display = "initial";
+        $("#survey").css({"display": "none"});
+        $("#dice-roll").css({"display": "initial"});
         saveLocation("dice-roll");
     }
     else if (part === 8) {
@@ -279,106 +273,18 @@ var continue_buttons = function (part) {
         document.getElementById("results").style.display = "initial";
         saveLocation("results");
     }
-    else {
-        document.getElementById("results").style.display = "none";
-        document.getElementById("admin_field").style.display = "initial";
-    }
 };
 
 function experiment() {
-    var Defs = [
-        "<strong>Recycled black water:</strong> Treated wastewater from toilets and urinals.",
-        "<strong>Recycled gray water:</strong> Treated wastewater from washing, laundering, bathing, " +
-        "and showering.",
-        "<strong>Recycled produced water:</strong> Treated wastewater from oil and gas drilling operations.",
-        "<strong>Conventional water:</strong> Traditional sources of irrigation water, such as surface water " +
-        "(rivers, lakes, ponds, and reservoirs) and well water."];
-    Defs.sort(function () {
-        return 0.5 - Math.random()
-    });
-
-    for (i = 0; i < Defs.length; i++) {
-        document.getElementById("waterDef-" + i.toString() + "-repeat").innerHTML = Defs[i].toString();
-    }
-    var grape_control = ["1 lb. of grapes"];
-    var grapes = ["1 lb. of grapes that were irrigated with <strong>conventional water</strong>",
-        "1 lb. of grapes that were irrigated with <strong>recycled black water</strong>",
-        "1 lb. of grapes that were irrigated with <strong>recycled gray water</strong>",
-        "1 lb. of grapes that were irrigated with <strong>recycled produced water</strong>"];
-    grapes.sort(function () {
-        return 0.5 - Math.random()
-    });
-    var grapes_sub = [];
-    grapes_sub.push(grape_control);
-    for (i = 0; i < grapes.length; i++) {
-        grapes_sub.push(grapes[i]);
-    }
-
-    var carrot_control = ["1 lb. of carrots"];
-    var carrots = ["1 lb. of carrots that were irrigated with <strong>conventional water</strong>",
-        "1 lb. of carrots that were irrigated with <strong>recycled black water</strong>",
-        "1 lb. of carrots that were irrigated with <strong>recycled gray water</strong>",
-        "1 lb. of carrots that were irrigated with <strong>recycled produced water</strong>"];
-    carrots.sort(function () {
-        return 0.5 - Math.random()
-    });
-    var carrots_sub = [];
-    carrots_sub.push(carrot_control);
-    for (i = 0; i < carrots.length; i++) {
-        carrots_sub.push(carrots[i]);
-    }
-
-    var almond_control = ["6 oz. of almonds"];
-    var almonds = ["6 oz. of almonds that were irrigated with <strong>conventional water</strong>",
-        "6 oz. of almonds that were irrigated with <strong>recycled black water</strong>",
-        "6 oz. of almonds that were irrigated with <strong>recycled gray water</strong>",
-        "6 oz. of almonds that were irrigated with <strong>recycled produced water</strong>"];
-    almonds.sort(function () {
-        return 0.5 - Math.random()
-    });
-    var almonds_sub = [];
-    almonds_sub.push(almond_control);
-    for (i = 0; i < almonds.length; i++) {
-        almonds_sub.push(almonds[i]);
-    }
-
-    var experimentQs_temp = [];
-    experimentQs_temp.push(grapes_sub);
-    experimentQs_temp.push(carrots_sub);
-    experimentQs_temp.push(almonds_sub);
-    experimentQs_temp.sort(function () {
-        return 0.5 - Math.random()
-    });
-
-    var experimentQs = [];
-    for (var i = 0; i < experimentQs_temp.length; i++) {
-        var question = experimentQs_temp[i];
-        for (var j = 0; j < question.length; j++) {
-            experimentQs.push(question[j]);
-        }
-    }
-
-    for (i = 0; i < experimentQs.length; i++) {
-        document.getElementById("price-" + i.toString()).value = (Math.random() * (5)).toFixed(2).toString();
-    }
-
-
-    for (i = 0; i < experimentQs.length; i++) {
-        if (experimentQs[i].toString().indexOf("grapes") !== -1) {
-            document.getElementById("treatment-" + i.toString()).src = "../images/grape.jpg";
-        }
-        else if (experimentQs[i].toString().indexOf("carrots") !== -1) {
-            document.getElementById("treatment-" + i.toString()).src = "../images/carrots.jpg";
-        }
-        else if (experimentQs[i].toString().indexOf("almonds") !== -1) {
-            document.getElementById("treatment-" + i.toString()).src = "../images/almonds.jpg";
-        }
-
-        document.getElementById("treatment-" + i.toString() + "-question").innerHTML =
-            "Do you want to buy " + experimentQs[i] + " for $" +
-            document.getElementById("price-" + i.toString()).value.toString();
-        document.getElementById("item-" + i.toString()).value = experimentQs[i].toString();
-    }
+    $.post("../php/serviceHandler.php", {action: "retrieveQuestions"})
+        .done(function(data){
+            var $obj = JSON.parse(data);
+            if($obj.result === true){
+                $("#exp_questions").html($obj.html);
+            } else {
+                console.log("Error retrieving questions")
+            }
+        })
 }
 
 function displayNextImage() {
@@ -393,65 +299,7 @@ function startTimer() {
 }
 
 function stopDice() {
-    var final_die = parseInt(document.getElementById("dice-number").innerHTML) + 1;
-    if (final_die === 1) {
-        updateFinalInfo("0", final_die);
-    }
-    else if (final_die === 2) {
-        updateFinalInfo("1", final_die);
-    }
-    else if (final_die === 3) {
-        updateFinalInfo("2", final_die);
-
-    }
-    else if (final_die === 4) {
-        updateFinalInfo("3", final_die);
-
-    }
-    else if (final_die === 5) {
-        updateFinalInfo("4", final_die);
-
-    }
-    else if (final_die === 6) {
-        updateFinalInfo("5", final_die);
-
-    }
-    else if (final_die === 7) {
-        updateFinalInfo("6", final_die);
-
-    }
-    else if (final_die === 8) {
-        updateFinalInfo("7", final_die);
-
-    }
-    else if (final_die === 9) {
-        updateFinalInfo("8", final_die);
-
-    }
-    else if (final_die === 10) {
-        updateFinalInfo("9", final_die);
-
-    }
-    else if (final_die === 11) {
-        updateFinalInfo("10", final_die);
-
-    }
-    else if (final_die === 12) {
-        updateFinalInfo("11", final_die);
-
-    }
-    else if (final_die === 13) {
-        updateFinalInfo("12", final_die);
-
-    }
-    else if (final_die === 14) {
-        updateFinalInfo("13", final_die);
-
-    }
-    else if (final_die === 15) {
-        updateFinalInfo("14", final_die);
-
-    }
+    var final_die = parseInt(document.getElementById("dice-number").innerHTML);
 
     document.getElementById("dice-number").style.display = "none";
     document.getElementById("dice_stopper").style.display = "none";
@@ -460,7 +308,7 @@ function stopDice() {
     document.getElementById("final-dice-number").innerHTML = final_die;
     document.getElementById("final-dice-number").style.display = "initial";
 }
-
+/*
 function updateFinalInfo(number, final_die) {
     document.getElementById("option-selected").value = final_die.toString();
     document.getElementById("optionNum").innerHTML = final_die.toString();
@@ -487,23 +335,23 @@ function updateFinalInfo(number, final_die) {
     document.getElementById("yesno-data").value =
         document.getElementById("treatment_" + number.toString() + "_decision").value;
 }
-
+*/
 function submitExperiment() {
-    if (document.getElementById("treatment_0_decision").value !== ''
-        && document.getElementById("treatment_1_decision").value !== ''
-        && document.getElementById("treatment_2_decision").value !== ''
-        && document.getElementById("treatment_3_decision").value !== ''
-        && document.getElementById("treatment_4_decision").value !== ''
-        && document.getElementById("treatment_5_decision").value !== ''
-        && document.getElementById("treatment_6_decision").value !== ''
-        && document.getElementById("treatment_7_decision").value !== ''
-        && document.getElementById("treatment_8_decision").value !== ''
-        && document.getElementById("treatment_9_decision").value !== ''
-        && document.getElementById("treatment_10_decision").value !== ''
-        && document.getElementById("treatment_11_decision").value !== ''
-        && document.getElementById("treatment_12_decision").value !== ''
-        && document.getElementById("treatment_13_decision").value !== ''
-        && document.getElementById("treatment_14_decision").value !== ''
+    if ($("[name='question0']:checked").val() !== ''
+        && $("[name='question1']:checked").val() !== ''
+        && $("[name='question2']:checked").val() !== ''
+        && $("[name='question3']:checked").val() !== ''
+        && $("[name='question4']:checked").val() !== ''
+        && $("[name='question5']:checked").val() !== ''
+        && $("[name='question6']:checked").val() !== ''
+        && $("[name='question7']:checked").val() !== ''
+        && $("[name='question8']:checked").val() !== ''
+        && $("[name='question9']:checked").val() !== ''
+        && $("[name='question10']:checked").val() !== ''
+        && $("[name='question11']:checked").val() !== ''
+        && $("[name='question12']:checked").val() !== ''
+        && $("[name='question13']:checked").val() !== ''
+        && $("[name='question14']:checked").val() !== ''
     ) {
         document.getElementById("continueExp").style.display = "initial";
         saveAnswers();
