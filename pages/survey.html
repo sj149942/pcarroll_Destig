@@ -62,7 +62,7 @@
                 <li>Which best describes your employment status?
                     <div class="radio-item">
                         <input title="radio" type="radio" name="employment" value="Not employed, not looking for work">
-                        <label>Not employed, not looking for work</label>
+                        <label>Not employed, <Strong>not</Strong> looking for work</label>
                     </div>
                     <div class="radio-item">
                         <input title="radio" type="radio" name="employment" value="Not employed, looking for work">
@@ -118,7 +118,7 @@
                                onfocus="$('#other_P').prop('checked', true)"
                         >
                     </div>
-                    <input hidden title="other" type="text" name="Poitical" value="">
+                    <input hidden title="other" type="text" name="Political" value="">
                     <br>
                 </li>
 
@@ -167,7 +167,7 @@
                     <br>
                 </li>
 
-                <li>Which category best describes your household income (before taxes) in 2017?
+                <li>Which category best describes your <u>household</u> income (before taxes) in 2017?
                     <div class="radio-item">
                         <input title="radio" type="radio" name="income" value="Less than $10000">
                         <label>Less than $10,000</label>
@@ -253,31 +253,38 @@
                                 <label for="Bottled_Water" style="display: block">Bottled Water:</label>
                                 <input type="text" id="Bottled_Water"
                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                                <p>days per week.</p>
+                                <p>days per month</p>
                             </li>
                             <li>
                                 <label for="spinach" style="display: block">Spinach:</label>
                                 <input type="text" id="spinach"
                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                                <p>days per week.</p>
+                                <p>days per month</p>
                             </li>
                             <li>
-                                <label for="clementines" style="display: block">Clementines</label>
+                                <label for="clementines" style="display: block">Clementines:</label>
                                 <input type="text" id="clementines"
                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                                <p>days per week.</p>
+                                <p>days per month</p>
                             </li>
                             <li>
-                                <label for="lamb" style="display: block">lamb</label>
+                                <label for="lamb" style="display: block">Lamb:</label>
                                 <input type="text" id="lamb"
                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                                <p>days per week.</p>
+                                <p>days per month</p>
                             </li>
                             <li>
-                                <label for="cheese" style="display: block">Cheddar Cheese</label>
+                            <label for="milk" style="display: block">Milk:</label>
+                            <input type="text" id="milk"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                            <p>days per month</p>
+                        </li>
+
+                            <li>
+                                <label for="cheese" style="display: block">Cheddar Cheese:</label>
                                 <input type="text" id="cheese"
                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                                <p>days per week.</p>
+                                <p>days per month</p>
                             </li>
                         </ul>
                     </div>
@@ -552,7 +559,7 @@
                 </li>
 
                 <!--Concern of water irrigation -->
-                <li>Would you be willing to drink the following types of water?
+                <li>How concerned would you be if your food was irrigated or produced with:
                     <ul>
                         <li>
                             <div class="slider">
@@ -992,7 +999,7 @@
                         </li>
                         <li>
                             <div class="slider">
-                                <p>122% Fresh Water: <strong>
+                                <p>100% Fresh Water: <strong>
                                     <output for="percentFreshWater2" id="percentFreshWaterPref2">3</output>
                                 </strong></p>
                                 <br>
@@ -1085,7 +1092,8 @@
                 </li>
 
                 <!-- Compare standards to tap water-->
-                <li>Would you be willing to drink the following types of water?
+                <li>Compared to tap water, the irrigation water standards for these types of water should be
+                    (where 3 means the same standards as conventional water):
                     <ul>
                         <li>
                             <div class="slider">
@@ -1258,7 +1266,7 @@
                         </li>
                         <li>
                             <div class="slider">
-                                <p>133% Fresh Water: <strong>
+                                <p>100% Fresh Water: <strong>
                                     <output for="percentFreshWater3" id="percentFreshWaterPref3">3</output>
                                 </strong></p>
                                 <br>
