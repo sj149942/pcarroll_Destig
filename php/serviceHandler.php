@@ -42,12 +42,18 @@ if(isset($_POST['action'])){
 
         case "newUser":
             try {
-                $random = random_int(0, 3);
+                $random = random_int(0, 2);
             } catch (Exception $e) {
                 echo $e;
             }
+            /**
+             * Treatments:
+             * A:   No information given
+             * B:   watch celebrity videos
+             * C:   Get info
+             */
 
-            $treatment = ['A', 'B', 'C', 'D'];
+            $treatment = ['A', 'B', 'C'];
 
             $sql = "INSERT INTO ConserveData (ID_number, treatment) VALUES (NULL, '".$treatment[$random]."')";
 
@@ -60,6 +66,7 @@ if(isset($_POST['action'])){
                 $response['result'] = false;
                 $response['error'] = $db -> error . "\t". $sql;
             }
+            $db->close();
             break;
 
         case "saveLocation":
@@ -79,6 +86,7 @@ if(isset($_POST['action'])){
                 $response['error'] =  $db -> error;
                 $response['sql'] = $sql;
             }
+            $db->close();
             break;
 
         case "saveAnswers":
@@ -104,6 +112,7 @@ if(isset($_POST['action'])){
                 $response['status'] = 2;
                 $response['error'] =  $db -> error;
             }
+            $db->close();
             break;
 
         case "saveItems":
@@ -129,6 +138,7 @@ if(isset($_POST['action'])){
                 $response['status'] = 2;
                 $response['error'] =  $db -> error;
             }
+            $db->close();
             break;
 
         case "savePrices":
@@ -154,7 +164,69 @@ if(isset($_POST['action'])){
                 $response['status'] = 2;
                 $response['error'] =  $db -> error;
             }
+            $db->close();
             break;
+
+        case "saveSurvey":
+            $answers = $_POST['answers'];
+            $id = $_POST['id'];
+
+            $sql = "";
+
+            $db->query($sql);
+            if ($db->affected_rows === 1 ){
+                //for debugging
+                $response['result'] = true;
+                $response['status'] = 1;
+            } else {
+                $response['status'] = 2;
+                $response['error'] =  $db -> error;
+            }
+            $db->close();
+            break;
+
+        case "retrieveTreatmentInfo":
+            $treatment = $_POST['treatment'];
+
+            switch ($treatment){
+                case "A":
+                    break;
+                case "B":
+                    $response['result'] = true;
+                    $response['html'] = "<div style=\"text-align: center;\"><video><source src='../video/crazykitty_512kb.mp4'></video></div>";
+                    break;
+                case "C":
+                    $response['result'] = true;
+                    $response['html'] = "<p><em>In previous studies, 95% of participants were willing to pay for food 
+                        produced with recycled irrigation water. </em></p>";
+            }
+            break;
+
+        case "retrieveQuestions":
+            $question = [
+                "<img src='../images/'><p>Do you want to purchase bottled </p>",
+                "<p>Do you want to purchase spinach irrigated with </p>",
+                "<p>Do you want to purchase clementines irrigated with </p>",
+                "<p>Do you want to purchase lamb that ate feed irrigated with </p>",
+                "<p>Do you want to purchase cheese made with milk from a cow that ate feed irrigated with </p>"
+            ];
+
+            $waterTypes = [
+                "<p><b>groundwater</b></p>",
+                "<p><b>treated wastewater</b></p>",
+                "<p><b>wastewater treated to national standards</b></p>",
+                "<p><b>groundwater from an aquifer recharged with treated wastewater</b></p>",
+                "<p><b>groundwater from an aquifer recharged with wasewater treated to national standards</b></p>"
+            ];
+
+            shuffle($question);
+            shuffle($waterTypes);
+
+            for ($i = 0; $i < count($question); $i++){
+                for ($j = 0; $j < count($waterTypes); $j++){
+                    echo "hi";
+                }
+            }
     }
 }
 
