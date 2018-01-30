@@ -1,6 +1,5 @@
 $(document).ready(function(){
-    //getUserID();
-    newUser();
+    //newUser();
 });
 
 var images = [], x = -1;
@@ -19,8 +18,6 @@ var ageVerify = function () {
             document.getElementById("submitSurvey").style.display = "initial";
         }
     }
-
-    console.log("hi")
 };
 
 function saveLocation($location) {
@@ -113,7 +110,106 @@ function savePrices(){
         })
 }
 
+function saveSurvey(){
+    var $id = $("#idOutput").val();
 
+    var $answers = [];
+    $answers[0] = $("#age").val();
+    $answers[1] = $("[name='gender']:checked").val();
+    $answers[2] = $("#zip").val();
+    $answers[3] = $("#profession").val();
+    $answers[4] = $("#industry").val();
+    $answers[5] = $("[name='employment']:checked").val();
+    $answers[6] = $("[name='Political']:checked").val();
+    $answers[7] = $("[name='Ethnicity']:checked").val();
+    $answers[8] = $("[name='income']:checked").val();
+    $answers[9] = $("[name='education']:checked").val();
+    $answers[10] = $("#Bottled_Water").val();
+    $answers[11] = $("#spinach").val();
+    $answers[12] = $("#clementines").val();
+    $answers[13] = $("#lamb").val();
+    $answers[14] = $("#cheese").val();
+
+    //shit ton of fucking sliders
+    for (var i = 0; i < 4; i++) {
+        $answers.push($("#recycledWaterPref"+ i).val());
+        $answers.push($("#reusedWaterPref"+ i).val());
+        $answers.push($("#treatedWaterPref"+ i).val());
+        $answers.push($("#pureWaterPref"+ i).val());
+        $answers.push($("#NEWaterPref"+ i).val());
+        $answers.push($("#nonTradWaterPref"+ i).val());
+        $answers.push($("#lFootWaterPref"+ i).val());
+        $answers.push($("#sustainableWaterPref"+ i).val());
+        $answers.push($("#advPurifiedWaterPref"+ i).val());
+        $answers.push($("#advPurifiedRecycledWaterPref"+ i).val());
+        $answers.push($("#greenWaterPref"+ i).val());
+        $answers.push($("#reclaimedWaterPref"+ i).val());
+        $answers.push($("#pureRecycledWaterPref"+ i).val());
+        $answers.push($("#percentFreshWaterPref"+ i).val());
+        $answers.push($("#naturalWaterPref"+ i).val());
+        $answers.push($("#allFreshWaterPref"+ i).val());
+        $answers.push($("#ecoFriendlyWaterPref"+ i).val());
+        $answers.push($("#ecoWaterPref"+ i).val());
+        $answers.push($("#enviroWaterPref"+ i).val());
+        $answers.push($("#reNewWaterPref"+ i).val());
+    }
+
+    $answers.push($("[name='childrenUnder18']:checked").val());
+    $answers.push($("[name='growFood']:checked").val());
+    $answers.push($("[name='typeWater']:checked").val());
+
+    for (var j = 0; j < 2; j++){
+        $answers.push($("#communityConcernPref" + j).val());
+        $answers.push($("#stateConcernPref" + j).val());
+        $answers.push($("#usConcernPref" + j).val());
+        $answers.push($("#globalConcernPref" + j).val());
+        $answers.push($("#presentConcern" + j).val());
+        $answers.push($("#tenYearsConcern" + j).val());
+        $answers.push($("#fiftyYearsConcern" + j).val());
+        $answers.push($("#fiftyPlusYearsConcern" + j).val());
+    }
+
+    $answers.push($("[name='groundWater']:checked").val());
+    $answers.push($("[name='wasteWater']:checked").val());
+    $answers.push($("[name='epaWasteWater']:checked").val());
+    $answers.push($("[name='aquiferWater']:checked").val());
+    $answers.push($("[name='epaAquiferWater']:checked").val());
+
+    $answers.push($("#groundWater").val());
+    $answers.push($("#wasteWater").val());
+    $answers.push($("#epaWasteWater").val());
+    $answers.push($("#aquiferWater").val());
+    $answers.push($("#epaAquiferWater").val());
+
+    //so much data bruh
+    $.post("../php/serviceHandler.php", {action: "saveSurvey", answers:$answers, id: $id})
+        .done( function (data) {
+        var $obj = JSON.parse(data);
+        if($obj.result === true){
+            console.log(data);
+        } else{
+            console.log(data);
+        }
+    });
+
+    console.log($answers);
+}
+
+function getTreatmentInfo(){
+    var $treatment = document.getElementById("treatment").value;
+
+    $.post("../php/serviceHandler.php", {action: "retrieveTreatmentInfo", treatment: $treatment})
+        .done(function(data){
+            var $obj = JSON.parse(data);
+
+            if($obj.result === true){
+                $("#info").html($obj.html);
+            } else {
+                console.log("shit");
+            }
+        });
+
+}
 
 var continue_buttons = function (part) {
     if (part === 1) {
@@ -122,75 +218,38 @@ var continue_buttons = function (part) {
     else if (part === 2) {
         document.getElementById("ID").style.display = "none";
         document.getElementById("instructions").style.display = "initial";
-        saveLocation("instructions");
     }
     else if (part === 3) {
         document.getElementById("User_ID").style.display = "initial";
-        document.getElementById("instructions").style.display = "none";
-        document.getElementById("definition").style.display = "initial";
-        var Defs = [
-            "<strong>Recycled black water:</strong> Treated wastewater from toilets and urinals.",
-            "<strong>Recycled gray water:</strong> Treated wastewater from washing, laundering, bathing, " +
-            "and showering.",
-            "<strong>Recycled produced water:</strong> Treated wastewater from oil and gas drilling operations.",
-            "<strong>Conventional water:</strong> Traditional sources of irrigation water, such as surface water " +
-            "(rivers, lakes, ponds, and reservoirs) and well water."];
-        Defs.sort(function () {
-            return 0.5 - Math.random()
-        });
-
-        for (var i = 0; i < Defs.length; i++) {
-            document.getElementById("waterDef-" + i.toString()).innerHTML = Defs[i].toString();
-        }
-
-        saveLocation('definitions');
-    }
-    else if (part === 4) {
-        var info_array = ["According to the United States Environmental Protection " +
-        "Agency (EPA), In addition to providing a dependable, locally-controlled water supply water " +
-        "recycling provides tremendous environmental benefits. By providing an additional source of water, " +
-        "water recycling can help us find ways to decrease the diversion of water from sensitive ecosystems." +
-        "Other benefits include decreasing wastewater discharges and reducing and preventing pollution\". " +
-        "Recycled water can also be used to create or enhance wetlands and [riverside] habitats.",
-            "According to cropscience.org ... \"There have been a number " +
-            "of risk factors identified for using recycled waters for purposes such as agricultural irrigation. " +
-            "Some risk factors are short term and vary in severity depending on the potential for human, animal " +
-            "or environmental contact (eg, microbial pathogens), while others have longer term impacts which " +
-            "increase with continued use of recycled water (eg, salt effects on soil)."];
-
         var $treatment = $("#treatment").val();
 
         switch($treatment){
             case "A":
-                document.getElementById("definition").style.display = "none";
+                document.getElementById("instructions").style.display = "none";
                 document.getElementById("experiment").style.display = "initial";
                 saveLocation("experiment");
                 experiment();
                 break;
             case "B":
-                document.getElementById("info").innerHTML = info_array[0].toString();
-                document.getElementById("definition").style.display = "none";
+                document.getElementById("instructions").style.display = "none";
                 document.getElementById("information").style.display = "initial";
                 saveLocation("information");
+                getTreatmentInfo();
                 break;
             case "C":
-                document.getElementById("info").innerHTML = info_array[1].toString();
-                document.getElementById("definition").style.display = "none";
+                document.getElementById("instructions").style.display = "none";
                 document.getElementById("information").style.display = "initial";
                 saveLocation("information");
+                getTreatmentInfo();
                 break;
-            case "D":
-                info_array.sort(function () {
-                    return 0.5 - Math.random()
-                });
 
-                document.getElementById("info").innerHTML = info_array[0].toString() + " <br><br> " +
-                    info_array[1].toString();
-                document.getElementById("definition").style.display = "none";
-                document.getElementById("information").style.display = "initial";
-                saveLocation("information");
-                break;
         }
+    }
+    else if (part === 4) {
+        $("#information").css({"display": "none"});
+        $("#experiment").css({"display": "initial"});
+        saveLocation("experiment");
+
     }
     else if (part === 5) {
         if (document.getElementById("treatment").value !== "A") {

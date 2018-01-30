@@ -301,6 +301,11 @@ hr {
     line-height: 120%;
 }
 
+.information video{
+    margin: 0 auto !important;
+
+}
+
 h3 {
     font-size: 4.0vmin;
     font-weight: bold;
@@ -402,6 +407,7 @@ h3 {
 
 .survey input[type=text] {
     font-size: 2.5vmin;
+    margin-left: 40px;
 }
 
 .survey li {
@@ -521,4 +527,9 @@ input[type="range"]:hover ~ #rangevalue, input[type="range"]:active ~ #rangevalu
 #reconnect_id, #reconnect_btn {
     display: inline;
     vertical-align: middle;
+}
+
+.percentBoxes input[type=text] {
+    width: 30px !important;
+    margin-left: 5px !important;
 }

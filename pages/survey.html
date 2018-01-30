@@ -4,838 +4,1707 @@
     <meta charset="UTF-8">
     <title>Survey</title>
     <link rel="stylesheet" type="text/css" href="../styles/style.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/main.js"></script>
 </head>
 <body>
 <!--Survey-->
 <div class="page-wrapper">
-<div id="survey" class="survey">
-    <form action="survey.php" method="post">
-        <ol>
-            <li>What is your age?
-                <br><br>
-                <input title="other" type="number" name="age" value="0" id="age" min="18" onkeyup="ageVerify()"
-                       onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127">
-                <br><br>
-            </li>
-            <li>What is your Gender?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="gender" value="male">Male
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="gender" value="female"> Female
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="gender" value="other"> Other
-                </div>
-            </li>
+    <div id="survey" class="survey">
+        <form action="survey.php" method="post">
+            <h2>Please answer the following questions:</h2>
+            <br>
+            <button type="button" onclick="saveSurvey()">Save</button>
+            <ol>
+                <li>What is your age?
+                    <br><br>
+                    <input title="other" type="number" name="age" id="age" min="18" onkeyup="ageVerify()"
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127">
+                    <br><br>
+                </li>
 
-            <li>Do you live in the U.S.?
-                <div>
+                <li>What is your Gender?
                     <div class="radio-item">
-                        <input title="radio" type="radio" name="live" value="yes">Yes
+                        <input title="radio" type="radio" name="gender" value="male"> Male
                     </div>
                     <div class="radio-item">
-                        <input title="radio" type="radio" name="live" value="no">No
+                        <input title="radio" type="radio" name="gender" value="female"> Female
                     </div>
-                </div>
-                <br>
-            </li>
-            <li>What is your ZIP code?
-                <br><br>
-                <input title="other" type="number" name="zip" id="zip" min="10000" max="99999"
-                       onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                <br><br>
-            </li>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="gender" value="other"> Prefer not to answer
+                    </div>
+                </li>
 
-            <li>What is your profession?
+                <li>What is your ZIP code?
+                    <br><br>
+                    <input title="" type="number" name="zip" id="zip" min="10000" max="99999"
+                           onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                    <br><br>
+                </li>
 
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="profession" value="Government">
-                    <label>Government</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="profession" value="Education">
-                    <label>Education</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="profession" value="Business">
-                    <label>Business</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="profession" value="Agriculture">
-                    <label>Agriculture</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="profession" value="Student">
-                    <label>Student</label>
-                </div>
-                <input title="radio" name="profession" type="radio">
-                <label>Other (please specify)</label>
-                <div class="radio-item">
-                    <input title="other" type="text" id="otherProfession"
+                <li>What is your profession?
+                    <br><br>
+                    <input title="other" type="text" name="profession" id="profession"
                            onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 &&
-                       event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
-                           onfocus="document.getElementById('other').checked = true;" value="">
-                </div>
-                <br>
-            </li>
+                       event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'>
+                    <br><br>
+                </li>
 
-            <li>Are you:
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="political" value="liberal"
-                           onclick="political_.value=this.value">
-                    <label>Politically liberal</label>
+                <li>What kind of business or industry is this?
+                    <br><br>
+                    <input title="other" type="text" name="industry" id="industry"
+                           onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 &&
+                       event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'>
+                    <br><br>
+
+                </li>
+
+                <li>Which best describes your employment status?
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Not employed, not looking for work">
+                        <label>Not employed, not looking for work</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Not employed, looking for work">
+                        <label>Not employed, looking for work</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Employed, working 1-20 hours per week">
+                        <label>Employed, working 1-20 hours per week</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Employed, working 21-39 hours per week">
+                        <label>Employed, working 21-39 hours per week</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Employed, working 40 or more hours per week">
+                        <label>Employed, working 40 or more hours per week</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Retired">
+                        <label>Retired</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Student">
+                        <label>Student</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="employment" value="Disabled, not able to work">
+                        <label>Disabled, not able to work</label>
+                    </div>
                     <br>
-                    <input title="radio" type="radio" name="political" value="moderate"
-                           onclick="political_.value=this.value">
-                    <label>Politically moderate</label>
+                </li>
+
+                <li>Are you in:
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Political" value="Politically liberal">
+                        <label>Politically liberal</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Political" value="Politically moderate">
+                        <label>Politically moderate</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Political" value="Politically conservative">
+                        <label>Politically conservative</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Political" id="other_P">
+                        <label>Other (please specify)</label>
+                        <input title="other" type="text" id="other_Political"
+                               onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 &&
+                               event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
+                               oninput="$('#other_P').val(this.value)"
+                               onfocus="$('#other_P').prop('checked', true)"
+                        >
+                    </div>
+                    <input hidden title="other" type="text" name="Poitical" value="">
                     <br>
-                    <input title="radio" type="radio" name="political" value="conservative"
-                           onclick="political_.value=this.value">
-                    <label>Politically conservative</label>
+                </li>
+
+                <li>How would you identify your ethnicity?
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="Non-Hispanic White">
+                        <label>Non-Hispanic White</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="Hispanic or Latino">
+                        <label>Hispanic or Latino</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="Middle Eastern or Arab">
+                        <label>MiddleEastern or Arab</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="Black">
+                        <label>Black</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="East Asian">
+                        <label>East Asian</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="South Asian">
+                        <label>South Asian</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="Pacific Islander">
+                        <label>Pacific Islander</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" value="Native American">
+                        <label>Native American</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="Ethnicity" id="other_E">
+                        <label>Other (please specify)</label>
+                        <input title="other" type="text" id="other_Ethnicity"
+                               onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
+                               onkeyup="$('#other_E').val(this.value)"
+                               onfocus="$('#other_E').prop('checked', true)"
+                        >
+                    </div>
                     <br>
-                    <input title="radio" name="political" type="radio">
-                    <label>Other (please specify)</label>
+                </li>
+
+                <li>Which category best describes your household income (before taxes) in 2017?
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="Less than $10000">
+                        <label>Less than $10,000</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$10000-$14999">
+                        <label>$10,000-$14,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$15000-$24999">
+                        <label>$15,000-$24,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$25000-$34999">
+                        <label>$25,000-$34,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$35000-$49999">
+                        <label>$35,000-$49,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$50000-$74999">
+                        <label>$50,000-$74,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$75000-$99999">
+                        <label>$75,000-$99,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$100000-$149999">
+                        <label>$100,000-$149,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$150000-$199999">
+                        <label>$150,000-$199,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$200000-$249999">
+                        <label>$200,000-$249,999</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="income" value="$250000 and above">
+                        <label>$250,000 and above</label>
+                    </div>
                     <br>
-                    <input title="other" type="text"
-                           onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
-                           oninput="political_.value=this.value"
-                           onfocus="document.getElementById('other').checked = true;" value="">
-                    <input hidden title="other" type="text" name="political_" value="">
-                </div>
-                <br>
-            </li>
+                </li>
 
-            <li>How would you identify your ethnicity?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="Non-Hispanic White"
-                           onclick="ethnicity.value=this.value">
-                    <label>Non-Hispanic White</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="Hispanic or Latino"
-                           onclick="ethnicity.value=this.value">
-                    <label>Hispanic or Latino</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="Middle Eastern or Arab"
-                           onclick="ethnicity.value=this.value">
-                    <label>Middle Eastern or Arab</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="Black" onclick="ethnicity.value=this.value">
-                    <label>Black</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="East Asian"
-                           onclick="ethnicity.value=this.value">
-                    <label>East Asian</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="South Asian"
-                           onclick="ethnicity.value=this.value">
-                    <label>South Asian</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="Pacific Islander"
-                           onclick="ethnicity.value=this.value">
-                    <label>Pacific Islander</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="race" value="Native American"
-                           onclick="ethnicity.value=this.value">
-                    <label>Native American</label>
-                </div>
-                <div class="radio-item">
-                    <input title="other" type="radio" name="race">
-                    <label>Other (please specify)</label>
+                <!-- Level of education -->
+                <li>What is the highest level of education that you have completed?
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="education" value="Less than high school">
+                        <label>Less than high school</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="education" value="High school graduate or equivalent(i.e. GED)">
+                        <label>High school graduate or equivalent(i.e.GED)</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="education" value="Some college, but no degree">
+                        <label>Some college, but no degree</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="education" value="Associate degree">
+                        <label>Associate degree</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="education" value="Bachelor's degree">
+                        <label>Bachelor's degree</label>
+                    </div>
+                    <div class="radio-item">
+                        <input title="radio" type="radio" name="education" value="Graduate degree">
+                        <label>Graduate degree</label>
+                    </div>
                     <br>
-                    <input title="other" type="text" name="race"
-                           onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
-                           oninput="ethnicity.value=this.value"
-                           onfocus="document.getElementById('other').checked = true;" value="">
-                </div>
-                <input hidden title="other" type="text" name="ethnicity" value="">
-                <br>
-            </li>
+                </li>
 
-            <li>Which category best describes your <u>household</u> income (before taxes) in 2015?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="Less than $10000">
-                    <label>Less than $10,000</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$10000-$14999">
-                    <label>$10,000-$14,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$15000-$24999">
-                    <label>$15,000-$24,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$25000-$34999">
-                    <label>$25,000-$34,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$35000-$49999">
-                    <label>$35,000-$49,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$50000-$74999">
-                    <label>$50,000-$74,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$75000-$99999">
-                    <label>$75,000-$99,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$100000-$149999">
-                    <label>$100,000-$149,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$150000-$199999">
-                    <label>$150,000-$199,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$200000-$249999">
-                    <label>$200,000-$249,999</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="income" value="$250000 and above">
-                    <label>$250,000 and above</label>
-                </div>
-                <br>
-            </li>
+                <!-- how often they consume each water type -->
+                <li>How often do you consume the following types of foods and drinks?
+                    <br/><br>
+                    <div class="radio-item">
+                        <ul>
+                            <li>
+                                <label for="Bottled_Water" style="display: block">Bottled Water:</label>
+                                <input type="text" id="Bottled_Water"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                                <p>days per week.</p>
+                            </li>
+                            <li>
+                                <label for="spinach" style="display: block">Spinach:</label>
+                                <input type="text" id="spinach"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                                <p>days per week.</p>
+                            </li>
+                            <li>
+                                <label for="clementines" style="display: block">Clementines</label>
+                                <input type="text" id="clementines"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                                <p>days per week.</p>
+                            </li>
+                            <li>
+                                <label for="lamb" style="display: block">lamb</label>
+                                <input type="text" id="lamb"
+                                       onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                                <p>days per week.</p>
+                            </li>
+                            <li>
+                                <label for="cheese" style="display: block">Cheddar Cheese</label>
+                                <input type="text" id="cheese"
+                                       onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
+                                <p>days per week.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <br>
 
-            <li>What is the highest level of education that you have completed?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="education" value="Some high school">
-                    <label>Some high school</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="education" value="High school graduate">
-                    <label>High school graduate</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="education" value="Some college">
-                    <label>Some college</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="education" value="Associate degree">
-                    <label>Associate degree</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="education" value="Bachelor's degree">
-                    <label>Bachelor's degree</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="education" value="Graduate degree/Professional">
-                    <label>Graduate degree/Professional</label>
-                </div>
-                <br>
-            </li>
+                </li>
 
-            <li>How often do you consume the following produce:
-                <br/><br>
-                <h4>Grapes:</h4>
-                <br>
-                <input title="slider" type="number" name="GrapeConsume" value="0" id="GrapeConsume" min="0" max="7"
-                       style="width:80px;height:40px;"
-                       onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127 '>
-                <label> times per month</label>
+                <!-- Willingness to drink different types of water-->
+                <li>Would you be willing to drink the following types of water?
+                    <ul>
+                        <li>
+                            <div class="slider">
+                            <p>Recycled Water: <strong>
+                            <output for="recycledWater0" id="recycledWaterPref0">3</output>
+                            </strong></p>
+                            <br>
+                            <span><strong>Definitely not</strong></span>
+                            <input title="other" id="recycledWater0" type="range" min="1" max="5" step="1"
+                                   data-show-value="true"
+                                   oninput="$('#recycledWaterPref0').val(this.value)">
+                            <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reused Water: <strong>
+                                    <output for="reusedWater0" id="reusedWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reusedWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reusedWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Treated Water: <strong>
+                                    <output for="treatedWater0" id="treatedWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="treatedWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#treatedWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Water: <strong>
+                                    <output for="pureWater0" id="pureWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>NEWater: <strong>
+                                    <output for="NEWater0" id="NEWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="NEWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#NEWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Nontraditional Water: <strong>
+                                    <output for="nonTradWater0" id="nonTradWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="nonTradWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#nonTradWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Low Footprint Water: <strong>
+                                    <output for="lFootWater0" id="lFootWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="lFootWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#lFootWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Sustainable Water: <strong>
+                                    <output for="sustainableWater0" id="sustainableWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="sustainableWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#sustainableWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Water: <strong>
+                                    <output for="advPurifiedWater0" id="advPurifiedWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Recycled Water: <strong>
+                                    <output for="advPurifiedRecycledWater0" id="advPurifiedRecycledWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedRecycledWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedRecycledWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Green Water: <strong>
+                                    <output for="greenWater0" id="greenWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="greenWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#greenWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reclaimed Water: <strong>
+                                    <output for="reclaimedWater0" id="reclaimedWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reclaimedWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reclaimedWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Recycled Water: <strong>
+                                    <output for="pureRecycledWater0" id="pureRecycledWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureRecycledWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureRecycledWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>100% Fresh Water: <strong>
+                                    <output for="percentFreshWater0" id="percentFreshWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="percentFreshWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#percentFreshWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Natural Water: <strong>
+                                    <output for="naturalWater0" id="naturalWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="naturalWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#naturalWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Fresh Water: <strong>
+                                    <output for="allFreshWater0" id="allFreshWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="allFreshWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#allFreshWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Eco-Friendly Water: <strong>
+                                    <output for="ecoFriendlyWater0" id="ecoFriendlyWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoFriendlyWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoFriendlyWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EcoWater: <strong>
+                                    <output for="ecoWater0" id="ecoWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EnviroWater: <strong>
+                                    <output for="enviroWater0" id="enviroWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="enviroWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#enviroWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>ReNew Water: <strong>
+                                    <output for="reNewWater0" id="reNewWaterPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reNewWater0" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reNewWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                <br/><br>
-                <h4>Almonds:</h4>
-                <br>
-                <input title="slider" type="number" name="AlmondsConsume" value="0" id="AlmondsConsume" min="0" max="7"
-                       style="width:80px;height:40px;"
-                       onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                <label> times per month</label>
+                <!--Concern of water irrigation -->
+                <li>Would you be willing to drink the following types of water?
+                    <ul>
+                        <li>
+                            <div class="slider">
+                                <p>Recycled Water: <strong>
+                                    <output for="recycledWater1" id="recycledWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="recycledWater1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#recycledWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reused Water: <strong>
+                                    <output for="reusedWater1" id="reusedWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reusedWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reusedWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Treated Water: <strong>
+                                    <output for="treatedWater1" id="treatedWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="treatedWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#treatedWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Water: <strong>
+                                    <output for="pureWater1" id="pureWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureWaterPref0').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>NEWater: <strong>
+                                    <output for="NEWater1" id="NEWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="NEWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#NEWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Nontraditional Water: <strong>
+                                    <output for="nonTradWater1" id="nonTradWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="nonTradWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#nonTradWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Low Footprint Water: <strong>
+                                    <output for="lFootWater1" id="lFootWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="lFootWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#lFootWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Sustainable Water: <strong>
+                                    <output for="sustainableWater1" id="sustainableWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="sustainableWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#sustainableWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Water: <strong>
+                                    <output for="advPurifiedWater1" id="advPurifiedWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Recycled Water: <strong>
+                                    <output for="advPurifiedRecycledWater1" id="advPurifiedRecycledWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedRecycledWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedRecycledWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Green Water: <strong>
+                                    <output for="greenWater1" id="greenWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="greenWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#greenWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reclaimed Water: <strong>
+                                    <output for="reclaimedWater1" id="reclaimedWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reclaimedWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reclaimedWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Recycled Water: <strong>
+                                    <output for="pureRecycledWater1" id="pureRecycledWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureRecycledWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureRecycledWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>100% Fresh Water: <strong>
+                                    <output for="percentFreshWater1" id="percentFreshWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="percentFreshWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#percentFreshWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Natural Water: <strong>
+                                    <output for="naturalWater1" id="naturalWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="naturalWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#naturalWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Fresh Water: <strong>
+                                    <output for="allFreshWater1" id="allFreshWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="allFreshWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#allFreshWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Eco-Friendly Water: <strong>
+                                    <output for="ecoFriendlyWater1" id="ecoFriendlyWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoFriendlyWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoFriendlyWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EcoWater: <strong>
+                                    <output for="ecoWater1" id="ecoWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EnviroWater: <strong>
+                                    <output for="enviroWater1" id="enviroWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="enviroWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#enviroWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>ReNew Water: <strong>
+                                    <output for="reNewWater1" id="reNewWaterPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reNewWater1" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reNewWaterPref1').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                <br/><br>
-                <h4>Baby carrots:</h4>
-                <br>
-                <input title="slider" type="number" name="CarrotConsume" value="0" id="CarrotConsume" min="0" max="7"
-                       style="width:80px;height:40px;"
-                       onkeypress='return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127'>
-                <label> times per month</label>
-                <br>
-            </li>
+                <!-- Compare standards to potable water-->
+                <li>Compared to tap water, the potable (drinking water) standards for these types of water should be
+                    (where <b>3</b> means the same standards as conventional water):
+                    <ul>
+                        <li>
+                            <div class="slider">
+                                <p>Recycled Water: <strong>
+                                    <output for="recycledWater2" id="recycledWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="recycledWater2" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#recycledWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reused Water: <strong>
+                                    <output for="reusedWater2" id="reusedWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reusedWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reusedWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Treated Water: <strong>
+                                    <output for="treatedWater2" id="treatedWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="treatedWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#treatedWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Water: <strong>
+                                    <output for="pureWater2" id="pureWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>NEWater: <strong>
+                                    <output for="NEWater2" id="NEWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="NEWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#NEWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Nontraditional Water: <strong>
+                                    <output for="nonTradWater2" id="nonTradWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="nonTradWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#nonTradWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Low Footprint Water: <strong>
+                                    <output for="lFootWater2" id="lFootWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="lFootWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#lFootWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Sustainable Water: <strong>
+                                    <output for="sustainableWater2" id="sustainableWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="sustainableWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#sustainableWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Water: <strong>
+                                    <output for="advPurifiedWater2" id="advPurifiedWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Recycled Water: <strong>
+                                    <output for="advPurifiedRecycledWater2" id="advPurifiedRecycledWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedRecycledWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedRecycledWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Green Water: <strong>
+                                    <output for="greenWater2" id="greenWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="greenWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#greenWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reclaimed Water: <strong>
+                                    <output for="reclaimedWater2" id="reclaimedWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reclaimedWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reclaimedWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Recycled Water: <strong>
+                                    <output for="pureRecycledWater2" id="pureRecycledWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureRecycledWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureRecycledWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>122% Fresh Water: <strong>
+                                    <output for="percentFreshWater2" id="percentFreshWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="percentFreshWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#percentFreshWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Natural Water: <strong>
+                                    <output for="naturalWater2" id="naturalWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="naturalWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#naturalWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Fresh Water: <strong>
+                                    <output for="allFreshWater2" id="allFreshWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="allFreshWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#allFreshWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Eco-Friendly Water: <strong>
+                                    <output for="ecoFriendlyWater2" id="ecoFriendlyWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoFriendlyWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoFriendlyWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EcoWater: <strong>
+                                    <output for="ecoWater2" id="ecoWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EnviroWater: <strong>
+                                    <output for="enviroWater2" id="enviroWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="enviroWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#enviroWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>ReNew Water: <strong>
+                                    <output for="reNewWater2" id="reNewWaterPref2">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reNewWater2" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reNewWaterPref2').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>Are you the primary shopper in your household?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="primShop" value="yes">
-                    <label>Yes</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="primShop" value="no">
-                    <label>No</label>
-                </div>
-                <br>
-            </li>
+                <!-- Compare standards to tap water-->
+                <li>Would you be willing to drink the following types of water?
+                    <ul>
+                        <li>
+                            <div class="slider">
+                                <p>Recycled Water: <strong>
+                                    <output for="recycledWater3" id="recycledWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="recycledWater3" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#recycledWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reused Water: <strong>
+                                    <output for="reusedWater3" id="reusedWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reusedWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reusedWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Treated Water: <strong>
+                                    <output for="treatedWater3" id="treatedWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="treatedWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#treatedWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Water: <strong>
+                                    <output for="pureWater3" id="pureWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>NEWater: <strong>
+                                    <output for="NEWater3" id="NEWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="NEWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#NEWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Nontraditional Water: <strong>
+                                    <output for="nonTradWater3" id="nonTradWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="nonTradWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#nonTradWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Low Footprint Water: <strong>
+                                    <output for="lFootWater3" id="lFootWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="lFootWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#lFootWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Sustainable Water: <strong>
+                                    <output for="sustainableWater3" id="sustainableWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="sustainableWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#sustainableWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Water: <strong>
+                                    <output for="advPurifiedWater3" id="advPurifiedWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Advanced Purified Recycled Water: <strong>
+                                    <output for="advPurifiedRecycledWater3" id="advPurifiedRecycledWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="advPurifiedRecycledWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#advPurifiedRecycledWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Green Water: <strong>
+                                    <output for="greenWater3" id="greenWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="greenWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#greenWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Reclaimed Water: <strong>
+                                    <output for="reclaimedWater3" id="reclaimedWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reclaimedWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reclaimedWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Pure Recycled Water: <strong>
+                                    <output for="pureRecycledWater3" id="pureRecycledWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="pureRecycledWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#pureRecycledWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>133% Fresh Water: <strong>
+                                    <output for="percentFreshWater3" id="percentFreshWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="percentFreshWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#percentFreshWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Natural Water: <strong>
+                                    <output for="naturalWater3" id="naturalWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="naturalWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#naturalWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>All Fresh Water: <strong>
+                                    <output for="allFreshWater3" id="allFreshWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="allFreshWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#allFreshWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Eco-Friendly Water: <strong>
+                                    <output for="ecoFriendlyWater3" id="ecoFriendlyWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoFriendlyWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoFriendlyWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EcoWater: <strong>
+                                    <output for="ecoWater3" id="ecoWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="ecoWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#ecoWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>EnviroWater: <strong>
+                                    <output for="enviroWater3" id="enviroWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="enviroWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#enviroWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>ReNew Water: <strong>
+                                    <output for="reNewWater3" id="reNewWaterPref3">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Definitely not</strong></span>
+                                <input title="other" id="reNewWater3" type="range" value="3" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#reNewWaterPref3').val(this.value)">
+                                <span><strong>Definitely would</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>What is the percentage of fresh foods compared to canned or frozen foods in your overall
-                <strong>fruit</strong> consumption?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="freshCons" value="Less than 20% fresh">
-                    <label>Less than 20% fresh</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="freshCons" value="20-50% fresh">
-                    <label>20-50% fresh</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="freshCons" value="50-80% fresh">
-                    <label>50-80% fresh</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="freshCons" value="More than 80% fresh">
-                    <label>More than 80% fresh</label>
-                </div>
-                <br>
-            </li>
+                <!-- Children under 18 -->
+                <li>Do you have a child/children under 18 years old in your household?
+                    <div class="radio-item">
+                        <input title="" type="radio" name="childrenUnder18" value="yes"> Yes
+                    </div>
+                    <div class="radio-item">
+                        <input title="" type="radio" name="childrenUnder18" value="no"> No
+                    </div>
+                </li>
 
-            <li>What is the percentage of fresh foods compared to canned or frozen foods in your overall
-                <strong>vegetable</strong> consumption?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="freshACons" value="Less than 20% fresh">
-                    <label>Less than 20% fresh</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="freshACons" value="20-50% fresh">
-                    <label>20-50% fresh</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="freshACons" value="50-80% fresh">
-                    <label>50-80% fresh</label>
-                </div>
-                <div class="radio-item">
-                    <input title="other" type="radio" name="freshACons" value="More than 80% fresh">
-                    <label>More than 80% fresh</label>
-                </div>
-                <br>
-            </li>
+                <!-- grow your own food -->
+                <li>Do you grown your own food?
+                    <div class="radio-item">
+                        <input title="" type="radio" name="growFood" value="yes"> Yes
+                    </div>
+                    <div class="radio-item">
+                        <input title="" type="radio" name="growFood" value="no"> No
+                    </div>
+                </li>
 
-            <li>Do you grow your own food?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="HomeGrown" value="yes">
-                    <label>Yes</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="HomeGrown" value="no">
-                    <label>No</label>
-                </div>
-                <br>
-            </li>
+                <!-- What type of you drink -->
+                <li>What type of water do you drink?
+                    <div class="radio-item">
+                        <input title="" type="radio" name="typeWater" value="Bottled Water"> Bottled Water
+                    </div>
+                    <div class="radio-item">
+                        <input title="" type="radio" name="typeWater" value="Tap Water"> Tap Water
+                    </div>
+                    <div class="radio-item">
+                        <input title="" type="radio" name="typeWater" value="Bottled Water"> Filtered Water
+                    </div>
+                    <div class="radio-item">
+                        <input title="" type="radio" name="typeWater" id="otherWaterType" value=""> Other (Please specify)
+                        <input title="" type="text"
+                               onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
+                               onkeyup="$('#otherWaterType').val(this.value)"
+                               onfocus="$('#otherWaterType').prop('checked', true)">
+                    </div>
+                </li>
 
-            <li>How important are the following food attributes to you?
-                <div class="slider">
-                    <p>Price: <strong>
-                        <output for="foodPrice" id="foodPriceValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not Important (1)</strong></span>
-                    <input title="other" name="foodPrice" id="foodPrice" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 1)">
-                    <span><strong>Very Important (5)</strong></span>
-                </div>
+                <!-- how concerned are you about future water availability in areas-->
+                <li>How concerned are you about water availability in the future in these areas?
+                    <ul>
+                        <li>
+                            <div class="slider">
+                                <p>Your Community: <strong>
+                                    <output for="communityConcern0" id="communityConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="communityConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#communityConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Your State: <strong>
+                                    <output for="stateConcern0" id="stateConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="stateConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#stateConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>United States: <strong>
+                                    <output for="usConcern0" id="usConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="usConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#usConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Globally: <strong>
+                                    <output for="globalConcern0" id="globalConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="globalConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#globalConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                <div class="slider">
-                    <p>I want the time it takes me to prepare my food to be as minimal as possible: <strong>
-                        <output for="foodTime" id="foodTimeValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not Important (1)</strong></span>
-                    <input title="other" id="foodTime" name="foodTime" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 2)">
-                    <span><strong>Very Important (5)</strong></span>
-                </div>
+                <!-- how concerned are you about water availability in the future where you live-->
+                <li>How concerned are you about water availability in <b>in your community</b> over these time periods?
+                    <ul>
+                        <li>
+                            <div class="slider">
+                                <p>Present: <strong>
+                                    <output for="presentConcern0" id="presentConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="presentConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#presentConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Next 10 years: <strong>
+                                    <output for="tenYearsConcern0" id="tenYearsConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="tenYearsConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#tenYearsConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Next 50 years: <strong>
+                                    <output for="fiftyYearsConcern0" id="fiftyYearsConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="fiftyYearsConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#fiftyYearsConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Beyond the next 50 years: <strong>
+                                    <output for="fiftyPlusYearsConcern0" id="fiftyPlusYearsConcernPref0">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="fiftyPlusYearsConcern0" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#fiftyPlusYearsConcernPref0').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                <div class="slider">
-                    <p>Organic: <strong>
-                        <output for="foodOrganic" id="foodOrganicValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not Important (1)</strong></span>
-                    <input title="other" name="foodOrganic" id="foodOrganic" type="range" value="3" min="1" max="5"
-                           step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 3)">
-                    <span><strong>Very Important (5)</strong></span>
-                </div>
+                <!-- how concerned are you about climate change in areas-->
+                <li>How concerned are you about climate change in these areas?
+                    <ul>
+                        <li>
+                            <div class="slider">
+                                <p>Your Community: <strong>
+                                    <output for="communityConcern1" id="communityConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="communityConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#communityConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Your State: <strong>
+                                    <output for="stateConcern1" id="stateConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="stateConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#stateConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>United States: <strong>
+                                    <output for="usConcern1" id="usConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="usConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#usConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Globally: <strong>
+                                    <output for="globalConcern1" id="globalConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="globalConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#globalConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                <div class="slider">
-                    <p>I prefer to purchase foods that are GMO (Genetically Modified Organisms) free: <strong>
-                        <output for="foodNonGMO" id="foodNonGMOValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not Important (1)</strong></span>
-                    <input title="other" id="foodNonGMO" name="foodNonGMO" type="range" value="3" min="1" max="5"
-                           step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 4)">
-                    <span><strong>Very Important (5)</strong></span>
-                </div>
+                <!-- how concerned are you about climate change in these time periods-->
+                <li>How concerned are you about water availability in <b>in your community</b> over these time periods?
+                    <ul>
+                        <li>
+                            <div class="slider">
+                                <p>Present: <strong>
+                                    <output for="presentConcern1" id="presentConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="presentConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#presentConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Next 10 years: <strong>
+                                    <output for="tenYearsConcern1" id="tenYearsConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="tenYearsConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#tenYearsConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Next 50 years: <strong>
+                                    <output for="fiftyYearsConcern1" id="fiftyYearsConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="fiftyYearsConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#fiftyYearsConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="slider">
+                                <p>Beyond the next 50 years: <strong>
+                                    <output for="fiftyPlusYearsConcern1" id="fiftyPlusYearsConcernPref1">3</output>
+                                </strong></p>
+                                <br>
+                                <span><strong>Not Concerned</strong></span>
+                                <input title="other" id="fiftyPlusYearsConcern1" type="range" min="1" max="5" step="1"
+                                       data-show-value="true"
+                                       oninput="$('#fiftyPlusYearsConcernPref1').val(this.value)">
+                                <span><strong>Very Concerned</strong></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                <div class="slider">
-                    <p>The type of water my produce is irrigated with: <strong>
-                        <output for="foodWater" id="foodWaterValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not Important (1)</strong></span>
-                    <input title="other" id="foodWater" name="foodWater" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 5)">
-                    <span><strong>Very Important (5)</strong></span>
-                </div>
+                <!-- previous water knowledge -->
+                <li>Before this survey had you ever heard of:
+                    <ul>
+                        <li>Groundwater
+                            <div class="radio-item">
+                                <input title="" type="radio" name="groundWater" value="Yes"> Yes
+                            </div>
+                            <div class="radio-item">
+                                <input title="" type="radio" name="groundWater" value="No"> No
+                            </div>
+                        </li>
+                        <li>Treated wastewater
+                            <div class="radio-item">
+                                <input title="" type="radio" name="wasteWater" value="Yes"> Yes
+                            </div>
+                            <div class="radio-item">
+                                <input title="" type="radio" name="wasteWater" value="No"> No
+                            </div>
+                        </li>
+                        <li>Wastewater treated to EPA standards
+                            <div class="radio-item">
+                                <input title="" type="radio" name="epaWasteWater" value="Yes"> Yes
+                            </div>
+                            <div class="radio-item">
+                                <input title="" type="radio" name="epaWasteWater" value="No"> No
+                            </div>
+                        </li>
+                        <li>Groundwater from an aquifer that was recharged with treated wastewater
+                            <div class="radio-item">
+                                <input title="" type="radio" name="aquiferWater" value="Yes"> Yes
+                            </div>
+                            <div class="radio-item">
+                                <input title="" type="radio" name="aquiferWater" value="No"> No
+                            </div>
+                        </li>
+                        <li>Groundwater from an aquifer that was recharged with wastewater treated to EPA standards
+                            <div class="radio-item">
+                                <input title="" type="radio" name="epaAquiferWater" value="Yes"> Yes
+                            </div>
+                            <div class="radio-item">
+                                <input title="" type="radio" name="epaAquiferWater" value="No"> No
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-                <div class="slider">
-                    <p>Locally grown/produced: <strong>
-                        <output for="foodLocal" id="foodLocalValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not Important (1)</strong></span>
-                    <input title="other" id="foodLocal" name="foodLocal" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 6)">
-                    <span><strong>Very Important (5)</strong></span>
-                </div>
-                <br>
-            </li>
+                <!-- percent of produce irrigation -->
+                <li>What percentage of the produce that you typically buy do you think is irrigated with:
+                    <ul class="percentBoxes">
+                        <li>
+                            Groundwater:<input title="" type="text"
+                                                id="groundWater"
+                               onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127"> %
+                        </li>
+                        <li>
+                            Treated Wastewater:<input title="" type="text"
+                                                       id="wasteWater"
+                                                onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127"> %
+                        </li>
+                        <li>
+                            Water treated to EPA standards:<input title="" type="text"
+                                                                   id="epaWasteWater"
+                                                onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127"> %
+                        </li>
+                        <li>
+                            Groundwater from an aquifer that was recharged with treated wastewater:<input title="" type="text"
+                                                                                                           id="aquiferWater"
+                                                onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127"> %
+                        </li>
+                        <li>
+                            Groundwater from an aquifer that was recharged with wastewater treated to EPA standards:<input title="" type="text"
+                                                id="epaAquiferWater"
+                                                onkeypress="return event.charCode >= 48 && event.charCode <= 57|| event.which === 8 || event.which === 127"> %
+                        </li>
+                    </ul>
+                </li>
+            </ol>
 
-            <li>What type of water do you typically drink?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="WaterPref" value="Bottled"
-                           onclick="waterPref_.value=this.value">
-                    <label>Bottled Water</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="WaterPref" value="Filtered Tap"
-                           onclick="waterPref_.value=this.value">
-                    <label>Filtered Tap Water</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="WaterPref" value="Tap"
-                           onclick="waterPref_.value=this.value">
-                    <label>Tap Water</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="WaterPref" id="other">
-                    <label>Other (please specify)</label>
-                    <input title="other" type="text" id="otherWaterPref"
-                           onkeydown='return event.which >= 97 && event.which <= 122 || event.which >= 65 && event.which <= 90 || event.which === 8 || event.which === 127 || event.which === 32'
-                           oninput="waterPref_.value=this.value"
-                           value=""
-                    >
-                </div>
-                <input hidden title="other" type="text" name="waterPref_" value="">
-                <br>
-            </li>
-
-            <li>Do you know where the water in your home comes from (private well, public well, municipal water supply)?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="waterSource" value="yes">
-                    <label>Yes</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="waterSource" value="no">
-                    <label>No</label>
-                </div>
-                <br>
-            </li>
-
-            <li>How concerned are you about water availability in the future in these areas?
-                <div class="slider">
-                    <p>Your Community: <strong>
-                        <output for="waterCommunity" id="waterCommunityValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="waterCommunity" name="waterCommunity" type="range" value="3" min="1"
-                           max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 7)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Your State: <strong>
-                        <output for="waterState" id="waterStateValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="waterState" name="waterState" type="range" value="3" min="1" max="5"
-                           step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 8)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>United States: <strong>
-                        <output for="waterUS" id="waterUSValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="waterUS" name="waterUS" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 9)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Globally: <strong>
-                        <output for="waterWorld" id="waterWorldValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="waterWorld" name="waterWorld" type="range" value="3" min="1" max="5"
-                           step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 10)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-                <br>
-            </li>
-
-            <li>How concerned are you about water availability <strong>in your community</strong> over these following
-                time
-                periods?
-                <div class="slider">
-                    <p>Present: <strong>
-                        <output for="Present" id="PresentValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="present" name="present" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 11)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Next 10 years: <strong>
-                        <output for="tenYears" id="tenYearsValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="tenYears" name="tenYears" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 12)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Next 50 years: <strong>
-                        <output for="thirtyYears" id="thirtyYearsValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="thirtyYears" name="thirtyYears" type="range" value="3" min="1" max="5"
-                           step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 13)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Beyond the next 50 years: <strong>
-                        <output for="fiftyYears" id="fiftyYearsValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" id="fiftyYears" name="fiftyYears" type="range" value="3" min="1" max="5"
-                           step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 14)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-                <br>
-            </li>
-
-            <li>How concerned are you about climate change in these areas?
-                <div class="slider">
-                    <p>Your Community: <strong>
-                        <output for="climateCommunity" id="climateCommunityValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" name="climateCommunityValue" id="climateCommunity" type="range" value="3"
-                           min="1" max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 15)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Your State: <strong>
-                        <output for="climateState" id="climateStateValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" name="climateStateValue" id="climateState" type="range" value="3" min="1"
-                           max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 16)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>United States: <strong>
-                        <output for="climateUS" id="climateUSValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" name="climateUSValue" id="climateUS" type="range" value="3" min="1" max="5"
-                           step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 17)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Globally: <strong>
-                        <output for="climateWorld" id="climateWorldValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" name="climateWorldValue" id="climateWorld" type="range" value="3" min="1"
-                           max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 18)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-                <br>
-            </li>
-
-            <li>How concerned are you about climate change <strong>in your community</strong> over these following time
-                periods?
-                <div class="slider">
-                    <p>Present: <strong>
-                        <output for="climatePresent" id="climatePresentValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" name="climatePresentValue" id="climatePresent" type="range" value="3" min="1"
-                           max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 19)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Next 10 years: <strong>
-                        <output for="climateTenYears" id="climateTenYearsValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" name="climateTenYearsValue" id="climateTenYears" type="range" value="3" min="1"
-                           max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 20)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Next 50 years: <strong>
-                        <output for="climateThirtyYears_" id="climateThirtyYearsValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="other" name="climateThirtyYearsValue" id="climateThirtyYears" type="range" value="3"
-                           min="1" max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 21)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Beyond the next 50 years: <strong>
-                        <output for="climateFiftyYears" id="climateFiftyYearsValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Not At All (1)</strong></span>
-                    <input title="radio" name="climateFiftyYearsValue" id="climateFiftyYears" type="range" value="3"
-                           min="1" max="5" step="1" data-show-value="true"
-                           oninput="outputUpdate(value, 22)">
-                    <span><strong>Very Concerned (5)</strong></span>
-                </div>
-                <br>
-            </li>
-
-            <li>Before this experiment had you ever heard of:
-                <h4>Recycled produced water</h4>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="heardPro" value="yes">
-                    <label>Yes</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="heardPro" value="no">
-                    <label>No</label>
-                </div>
-
-                <h4>Recycled black water</h4>
-                <div class="radio-item">
-                    <input type="radio" title="radio" name="heardB" value="yes">
-                    <label>Yes</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="heardB" value="no">
-                    <label>No</label>
-                </div>
-
-                <h4>Recycled gray water</h4>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="heardG" value="yes">
-                    <label>Yes</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="heardG" value="no">
-                    <label>No</label>
-                </div>
-                <br>
-            </li>
-
-            <li>Do you reuse or recycle water at home?
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="reuseWater" value="yes">
-                    <label>Yes</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="reuseWater" value="no">
-                    <label>No</label>
-                </div>
-                <div class="radio-item">
-                    <input title="radio" type="radio" name="reuseWater" value="IDK">
-                    <label>Don't Know</label>
-                </div>
-                <br>
-            </li>
-
-            <li> Compared to conventional water, the standards for these types of water should be (where
-                <strong>3</strong>
-                means the same standards as conventional water):
-
-                <div class="slider">
-                    <p>Recycled produced water: <strong>
-                        <output for="YNDiff" id="YNDiffValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Greatly lower(1)</strong></span>
-                    <input title="slider" name="YNDiffValue" id="YNDiff" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 23)">
-                    <span><strong>Greatly higher(5)</strong></span>
-                </div>
-                <br>
-
-                <div class="slider">
-                    <p>Recycled black water: <strong>
-                        <output for="YNDiffA" id="YNDiffAValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Greatly lower(1)</strong></span>
-                    <input title="slider" name="YNDiffAValue" id="YNDiffA" type="range" value="3" min="1" max="5"
-                           step="1"
-                           data-show-value="true" oninput="outputUpdate(value, 24)">
-                    <span><strong>Greatly higher(5)</strong></span>
-                </div>
-                <br>
-
-                <div class="slider">
-                    <p>Recycled gray water: <strong>
-                        <output for="YNDiffB" id="YNDiffBValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Greatly lower(1)</strong></span>
-                    <input title="slider" name="YNDiffBValue" id="YNDiffB" type="range" value="3" min="1" max="5"
-                           step="1"
-                           data-show-value="true" oninput="outputUpdate(value, 25)">
-                    <span><strong>Greatly higher(5)</strong></span>
-                </div>
-                <br>
-            </li>
-
-            <li>I trust these groups to test and monitor recycled irrigation water:
-                <div class="slider">
-                    <p>The federal government:<strong>
-                        <output for="Fed" id="FedValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Strongly Disagree (1)</strong></span>
-                    <input id="Fed" name="Fed" title="slider" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 26)">
-                    <span><strong>Strongly Agree (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>My state government:<strong>
-                        <output for="StateGov" id="StateGovValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Strongly Disagree (1)</strong></span>
-                    <input id="StateGov" name="StateGov" title="slider" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true" oninput="outputUpdate(value, 27)">
-                    <span><strong>Strongly Agree (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>My local government:<strong>
-                        <output for="LocalGov" id="LocalGovValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Strongly Disagree (1)</strong></span>
-                    <input title="slider" name="LocalGov" id="LocalGov_" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true" oninput="outputUpdate(value, 28)">
-                    <span><strong>Strongly Agree (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Individual farmers:<strong>
-                        <output for="Farm" id="FarmValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Strongly Disagree (1)</strong></span>
-                    <input title="slider" name="Farm" id="Farm" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 29)">
-                    <span><strong>Strongly Agree (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Non-profit environmental groups:<strong>
-                        <output for="Np" id="NpValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Strongly Disagree (1)</strong></span>
-                    <input title="slider" name="Np" id="Np" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 30)">
-                    <span><strong>Strongly Agree (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>Public waste water treatment plants:<strong>
-                        <output for="Plant" id="PlantValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Strongly Disagree (1)</strong></span>
-                    <input id="Plant" name="Plant" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 31)" title="slider">
-                    <span><strong>Strongly Agree (5)</strong></span>
-                </div>
-
-                <div class="slider">
-                    <p>For-profit waste water treatment plants:<strong>
-                        <output for="PlantA" id="PlantAValue">3</output>
-                    </strong></p>
-                    <br><br>
-                    <span><strong>Strongly Disagree (1)</strong></span>
-                    <input id="PlantA" name="PlantA" type="range" value="3" min="1" max="5" step="1"
-                           data-show-value="true"
-                           oninput="outputUpdate(value, 32)" title="slider">
-                    <span><strong>Strongly Agree (5)</strong></span>
-                </div>
-            </li>
-
-        </ol>
-
-        <div class="warning"></div>
-        <br>
-        <button type="submit" id="submitSurvey" hidden>Continue</button>
-    </form>
-</div>
+            <div class="warning"></div>
+            <br>
+            <button type="submit" id="submitSurvey" hidden>Continue</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
