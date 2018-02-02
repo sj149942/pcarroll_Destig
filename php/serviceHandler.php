@@ -204,19 +204,17 @@ if(isset($_POST['action'])){
 
         case "retrieveQuestions":
             $question = [
-                "<img src='../images/'><p>Do you want to purchase bottled </p>",
+                "<img src='../images/'><p>Do you want to purchase bottled water</p>",
                 "<p>Do you want to purchase spinach irrigated with </p>",
-                "<p>Do you want to purchase clementines irrigated with </p>",
                 "<p>Do you want to purchase lamb that ate feed irrigated with </p>",
+                "<p>Do you want to purchase milk from a cow that ate feed irrigated with </p>",
                 "<p>Do you want to purchase cheese made with milk from a cow that ate feed irrigated with </p>"
             ];
 
             $waterTypes = [
                 "<p><b>groundwater</b></p>",
-                "<p><b>treated wastewater</b></p>",
-                "<p><b>wastewater treated to national standards</b></p>",
-                "<p><b>groundwater from an aquifer recharged with treated wastewater</b></p>",
-                "<p><b>groundwater from an aquifer recharged with wasewater treated to national standards</b></p>"
+                "<p><b>recycled water</b></p>",
+                "<p><b>groundwater from an aquifer recharged with recycled water</b></p>",
             ];
 
             shuffle($question);
